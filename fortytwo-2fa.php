@@ -1,9 +1,9 @@
 <?php
 
 /*
-Plugin Name: Fortytwo-2FA
+Plugin Name: Two Factor Authentication plugin
 Plugin URI: https://www.fortytwo.com
-Description: Implement the fortytwo 2FA service for login and register on wordpress.
+Description: Implement the fortytwo Two Factor Authentication service for login and register on wordpress.
 Version: 1.0.0
 Author: Sebastien Lemarinel <sebastien.lemarinel@fortytwo.com>
 Author URI: https://www.fortytwo.com
