@@ -1,0 +1,25 @@
+{
+  "name": "fortytwo/wordpress-plugin-two-factor-authentication",
+  "description": "Fortytwo’s Two-Factor Authentication (2FA) for your wordpress website. Adding 2FA on Registration and Login process.",
+  "keywords": ["wordpress", "plugin", "Fortytwo", "Two Factor Authentication", "2FA"],
+  "homepage": "https://www.fortytwo.com",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Sebastien Lemarinel",
+      "email": "sebastien.lemarinel@fortytwo.com",
+      "homepage": "https://www.fortytwo.com"
+    }
+  ],
+  "type": "wordpress-plugin",
+  "require": {
+    "php": ">=5.3.2",
+    "composer/installers": "v1.0.6",
+    "fortytwo/php-sdk-two-factor-authentication": "1.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Fortytwo\\Wordpress\\Plugin\\TwoFactorAuthentication\\": "src"
+    }
+  }
+}

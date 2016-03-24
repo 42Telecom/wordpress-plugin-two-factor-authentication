@@ -1,0 +1,52 @@
+<div id="wait-block" >
+    <small>You will receive the Activation code in less than <span id="countdown">60</span> seconds</small>
+</div>
+<div id="resend-block" >
+    <small>
+        If you haven\'t received the SMS you can request a new SMS by <a href="#" id="resend-code" onclick="showResend()" >clicking here</a>.
+    </small>
+    <br/>
+    <br/>
+    <div id="formReSend" >
+        <form method="POST" >
+            <input
+                type="hidden"
+                name="user_login"
+                id="user_login"
+                value="{{userLogin}}"
+            />
+            <input
+                type="hidden"
+                name="user_email"
+                id="user_email"
+                value="{{userEmail}}"
+            />
+            <input
+                type="hidden"
+                name="redirect_to"
+                value="{{redirectTo}}"
+            />
+            <p>
+                <label>
+                    Resend the code with the following number:
+                    <input type="text" id="mobile-number" name="2faPhone" value="{{resendPhoneNumber}}" />
+                </label>
+            </p>
+            <br />
+            <p class="submit">
+                <input name="re-send" id="re-send" class="button button-primary button-large" value="Re-send" type="submit">
+            </p>
+        </form>
+    </div>
+</div>
+
+<script>
+    function showResend() {
+        if (jQuery("#formReSend").css('display') == 'block') {
+            jQuery("#formReSend").css('display', 'none');
+        } else {
+            jQuery("#formReSend").css('display', 'block');
+        }
+        return false;
+    }
+</script>
