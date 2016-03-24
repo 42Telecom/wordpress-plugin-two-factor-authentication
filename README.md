@@ -1,1 +1,2 @@
-fortytwo-2fa
+Fortytwo - Two Factor Authentication plugin for Wordpress.
+=========================================================
