@@ -1,0 +1,99 @@
+        <form
+            name="validate_2fa_form"
+            id="loginform"
+            action="{{formAction}}"
+            method="post"
+            autocomplete="off"
+        >
+                <input
+                    type="hidden"
+                    name="wp-auth-id"
+                    id="wp-auth-id"
+                    value="{{userId}}"
+                />
+                <input
+                    type="hidden"
+                    name="fortytwo-client-ref"
+                    id="fortytwo-client-ref"
+                    value="{{clientRef}}"
+                />
+                <input
+                    type="hidden"
+                    name="wp-auth-nonce"
+                    id="wp-auth-nonce"
+                    value="{{authNonce}}"
+                />
+                <input
+                    type="hidden"
+                    name="interim-login"
+                    value="{{interimLogin}}"
+                />
+                <input
+                    type="hidden"
+                    name="redirect_to"
+                    value="{{redirectTo}}"
+                />
+                <input
+                    type="hidden"
+                    name="rememberme"
+                    id="rememberme"
+                    value="{{rememberMe}}"
+                />
+                <h3>2 Factor Authentication</h3>
+                <br>
+                <p>In a few moments you will receive an SMS with a {{digits}}-digit code.</p>
+                <br>
+                <p>
+                    <label for="user_pass">Mobile Activation Code<br>
+                    <input
+                        type="text"
+                        name="code"
+                        id="code"
+                        value=""
+                    />
+                </p>
+                <p>
+                    <input name="trusted-device" id="trusted-device" value="trusted" type="checkbox">
+                    <label>This device is a trusted device</label>
+                    <br><br>
+                </p>
+                <p class="submit">
+                    <input name="wp-submit" id="wp-submit" class="button button-primary button-large" value="Confirm" type="submit">
+                </p>
+
+
+                {{resendSMS}}
+        </form>
+
+        <p id="backtoblog">
+            <a href="{{homeUrl}}" title="Are you lost?">{{HomeUrlLabel}}</a>
+        </p>
+        {{wpFooter}}
+        <div class="clear"></div>
+
+        <script>
+            var seconds;
+            var temp;
+
+            function countdown() {
+              seconds = document.getElementById('countdown').innerHTML;
+              seconds = parseInt(seconds, 10);
+
+              if (seconds == 1) {
+                  jQuery('#wait-block').css('display','none');
+                  jQuery('#resend-block').css('display','block');
+                  return;
+              }
+
+              seconds--;
+              temp = document.getElementById('countdown');
+              temp.innerHTML = seconds;
+              timeoutMyOswego = setTimeout(countdown, 1000);
+            }
+
+            jQuery(document).ready(function($) {
+                countdown();
+            });
+        </script>
+    </body>
+</html>
