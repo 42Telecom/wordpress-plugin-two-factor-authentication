@@ -151,7 +151,9 @@ echo -e "\n"
 
 echo -e "Commit trunk"
 
+
 # Commit on trunk
+cp assets/* $LOCALSVN/assets/
 svn add $LOCALSVN/trunk/*
 svn ci -m "Update trunk from Git repo ${LASTGITTAG}" --username $LOGIN --password $PASSWORD $LOCALSVN
 
