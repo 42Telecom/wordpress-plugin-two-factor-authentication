@@ -130,6 +130,7 @@ echo -e "\n"
 
 echo -e "Checking out to GIT master branch"
 # Get the tag from the current git repo
+CURRENTBRANCH="$(git rev-parse --abbrev-ref HEAD)"
 git checkout master
 if [ $? = 1 ]; then
     echo -e "${RED}[EE] Git error${NC}"
@@ -137,8 +138,6 @@ if [ $? = 1 ]; then
 fi
 
 LASTGITTAG="$(git describe --abbrev=0 --tags)"
-CURRENTBRANCH="$(git rev-parse --abbrev-ref HEAD)"
-echo "${LASTGITTAG}"
 
 # Copy project files on svn directory
 rsync -av --delete --exclude-from '.rsyncignore' . svn/trunk
