@@ -1,9 +1,9 @@
 === WordPress Plugin Template ===
 Contributors: Sebastien Lemarinel
 Tags: 2fa, Two factor authentication, login, register
-Requires at least: 4.0
-Tested up to: 4.0
-Stable tag: 1.0.0-RC1
+Requires at least: 4.4
+Tested up to: 4.4
+Stable tag: 1.0.0
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -35,12 +35,6 @@ Installing "Fortytwo Two Factor Authentication plugin" can be done either by sea
 The project is managed with Github. So you can report an issues on our [Repository](https://github.com/42Telecom "Your Preferred Messaging Solutions Partner").
 
 == Changelog ==
-
-= 1.0.0-RC1 =
-* 2016-03-24
-* Initial features - Release Candidate
-
-== Upgrade Notice ==
 
 = 1.0.0-RC1 =
 * 2016-03-24

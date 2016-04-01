@@ -131,7 +131,7 @@ echo -e "\n"
 echo -e "Checking out to GIT master branch"
 # Get the tag from the current git repo
 CURRENTBRANCH="$(git rev-parse --abbrev-ref HEAD)"
-git checkout master
+#git checkout master
 if [ $? = 1 ]; then
     echo -e "${RED}[EE] Git error${NC}"
     exit 1
@@ -139,11 +139,28 @@ fi
 
 LASTGITTAG="$(git describe --abbrev=0 --tags)"
 
+echo -e "\n"
+
+echo -e "sync current Git with SVN trunk"
+
 # Copy project files on svn directory
 rsync -av --delete --exclude-from '.rsyncignore' . svn/trunk
 
-# Commit and tag the branch
 
-# Push the change on Wordpress svn repository
+echo -e "\n"
+
+echo -e "Commit trunk"
+
+# Commit on trunk
+svn add $LOCALSVN/trunk/*
+svn ci -m "Update trunk from Git repo ${LASTGITTAG}" --username $LOGIN --password $PASSWORD $LOCALSVN
+
+echo -e "\n"
+
+echo -e "Commit version"
+
+# Create a branch
+svn copy $LOCALSVN/trunk $LOCALSVN/tags/${LASTGITTAG}
+svn ci -m "tagging version ${LASTGITTAG}" --username $LOGIN --password $PASSWORD $LOCALSVN
 
 git checkout $CURRENTBRANCH
