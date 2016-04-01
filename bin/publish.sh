@@ -12,7 +12,6 @@
 #
 # -l or --login:    Login for the Wordpress SVN repository
 # -p or --password: Password for the Wordpress SVN repository
-# -t or --tag:      Git tag to use as build reference (optional, by default using the last tag)
 #
 # Author: Sebastien Lemarinel <sebastien.lemarinel@fortytwo.com>
 # Company Fortytwo <https://www.fortytwo.com>
@@ -27,7 +26,7 @@ RED='\033[0;31m'
 YELLOW='\033[0;33m'
 NC='\033[0m'
 # Dependencies
-dependencies=("git" "svn")
+dependencies=("git" "svn" "rsync")
 dependenciesStatus=true
 # Repository
 REPOSITORY="https://plugins.svn.wordpress.org/fortytwo-two-factor-authentication/"
@@ -65,7 +64,7 @@ do
 done
 
 if [ "$dependenciesStatus" = false ] ; then
-    echo -e "${RED}Dependencies missing.${NC}"
+    echo -e "${RED}[EE] Dependencies missing.${NC}"
     exit 1
 fi
 echo -e "\n"
@@ -74,7 +73,7 @@ echo -e "\n"
 echo -e "Checking parameters..."
 
 # Get the options
-TEMP=`getopt -o l:p:t:: --long login:,password:,tag:: -n 'publish.sh' -- "$@"`
+TEMP=`getopt -o l:p: --long login:,password: -n 'publish.sh' -- "$@"`
 eval set -- "$TEMP"
 
 
@@ -90,19 +89,14 @@ while true ; do
                 "") shift 2 ;;
                 *) PASSWORD=$2 ; shift 2 ;;
             esac ;;
-        -t|--tag)
-            case "$2" in
-                "") TAG=false ; shift 2 ;;
-                *) TAG=$2 ; shift 2 ;;
-            esac ;;
         --) shift ; break ;;
-        *) echo -e "${RED}Internal error!${NC}" ; exit 1 ;;
+        *) echo -e "${RED}[EE] Internal error!${NC}" ; exit 1 ;;
     esac
 done
 
 # Check for required parameters
 if [ -z $LOGIN ] || [ -z $PASSWORD ] ; then
-    echo -e "${RED}The following parameter(s) are missing: ${NC}"
+    echo -e "${RED}[EE] The following parameter(s) are missing: ${NC}"
     if [ -z $LOGIN ] ; then
         echo -e "${RED}- Login (-l or --login)${NC}"
     fi
@@ -110,6 +104,7 @@ if [ -z $LOGIN ] || [ -z $PASSWORD ] ; then
     if [ -z $PASSWORD ] ; then
         echo -e "${RED}- Password  (-p or --password)${NC}"
     fi
+    exit 1
 else
     echo -e "${GREEN}[OK] parameters.${NC}"
 fi
@@ -131,10 +126,25 @@ if [ $? = 1 ]; then
     echo -e "${YELLOW}[WW] Creating the svn repository.${NC}"
 fi
 
-# Get the tag in param or the last tag from git repo
+echo -e "\n"
+
+echo -e "Checking out to GIT master branch"
+# Get the tag from the current git repo
+git checkout master
+if [ $? = 1 ]; then
+    echo -e "${RED}[EE] Git error${NC}"
+    exit 1
+fi
+
+LASTGITTAG="$(git describe --abbrev=0 --tags)"
+CURRENTBRANCH="$(git rev-parse --abbrev-ref HEAD)"
+echo "${LASTGITTAG}"
 
 # Copy project files on svn directory
+rsync -av --delete --exclude-from '.rsyncignore' . svn/trunk
 
 # Commit and tag the branch
 
 # Push the change on Wordpress svn repository
+
+git checkout $CURRENTBRANCH
