@@ -177,6 +177,12 @@ class Register extends AbstractAuth
                     echo '<div id="login_error"><strong>' . esc_html($errorMsg) . '</strong><br /></div>';
                 }
 
+                if (isset($options['apiCodeLength'])) {
+                    $digits = $options['apiCodeLength'];
+                } else {
+                    $digits = 4;
+                }
+
                 //Hack for capturing the footer
                 ob_start();
                 do_action('login_footer');
