@@ -35,6 +35,13 @@ Installing "Fortytwo Two Factor Authentication plugin" can be done either by sea
 
 The project is managed with Github. So you can report an issues on our [Repository](https://github.com/42Telecom/wordpress-plugin-two-factor-authentication "Fortytwo Two Factor Authentication").
 
+== Screenshots ==
+
+1. Setting panel
+2. On Register
+3. Input the SMS code
+4. Resend the SMS code
+
 == Changelog ==
 
 = 1.0.0-RC3 =
