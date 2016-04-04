@@ -44,10 +44,16 @@ The project is managed with Github. So you can report an issues on our [Reposito
 
 == Changelog ==
 
+= 1.0.0-RC5 =
+* Small fixes
+
+= 1.0.0-RC4 =
+* Fixing various bugs
+* Adding screenshots for the wordpress plugin website
+
 = 1.0.0-RC3 =
-* 2016-03-24
 * Adding Assets and updating Readme file.
+* Adding assets : banner and icons.
 
 = 1.0.0-RC1 =
-* 2016-03-24
 * Initial features - Release Candidate.

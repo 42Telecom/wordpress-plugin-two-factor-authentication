@@ -155,6 +155,7 @@ echo -e "Commit trunk"
 # Commit on trunk
 cp assets/* $LOCALSVN/assets/
 svn add $LOCALSVN/trunk/*
+svn add $LOCALSVN/assets/*
 
 echo -e "\n"
 
