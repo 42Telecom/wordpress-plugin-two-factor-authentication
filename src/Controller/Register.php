@@ -17,9 +17,7 @@ class Register extends AbstractAuth
      */
     public function __construct()
     {
-        $options = get_option('fortytwo2fa');
-
-        if (!isset($options['twoFactorOnRegister']) || ($options['twoFactorOnRegister'] == 'activated')) {
+        if (self::isTwoFactorAvailableOn('login')) {
             // Action on register
             // Show the phone number field on the register form
             add_action('register_form', array($this, 'addTwoFactorRegister'), 10, 2);
@@ -179,6 +177,12 @@ class Register extends AbstractAuth
                     echo '<div id="login_error"><strong>' . esc_html($errorMsg) . '</strong><br /></div>';
                 }
 
+                if (isset($options['apiCodeLength'])) {
+                    $digits = $options['apiCodeLength'];
+                } else {
+                    $digits = 4;
+                }
+
                 //Hack for capturing the footer
                 ob_start();
                 do_action('login_footer');
@@ -199,6 +203,7 @@ class Register extends AbstractAuth
                         'wpFooter'      => $wpFooter,
                         'clientRef'     => $clientRef,
                         'resendSMS'     => $resendHtml,
+                        '2faPhone'      => $phoneNumber,
                         'digits'        => $digits
                     )
                 );

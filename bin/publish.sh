@@ -155,7 +155,6 @@ echo -e "Commit trunk"
 # Commit on trunk
 cp assets/* $LOCALSVN/assets/
 svn add $LOCALSVN/trunk/*
-svn ci -m "Update trunk from Git repo ${LASTGITTAG}" --username $LOGIN --password $PASSWORD $LOCALSVN
 
 echo -e "\n"
 
@@ -163,6 +162,6 @@ echo -e "Commit version"
 
 # Create a branch
 svn copy $LOCALSVN/trunk $LOCALSVN/tags/${LASTGITTAG}
-svn ci -m "tagging version ${LASTGITTAG}" --username $LOGIN --password $PASSWORD $LOCALSVN
+svn ci -m "New version ${LASTGITTAG}" --username $LOGIN --password $PASSWORD $LOCALSVN
 
 git checkout $CURRENTBRANCH
