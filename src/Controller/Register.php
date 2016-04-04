@@ -203,6 +203,7 @@ class Register extends AbstractAuth
                         'wpFooter'      => $wpFooter,
                         'clientRef'     => $clientRef,
                         'resendSMS'     => $resendHtml,
+                        '2faPhone'      => $phoneNumber,
                         'digits'        => $digits
                     )
                 );

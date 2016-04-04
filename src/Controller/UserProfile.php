@@ -38,12 +38,12 @@ class UserProfile extends AbstractAuth
      */
     public function addTwoFactorSection($user)
     {
-        $phoneValue = esc_attr(get_user_option('2faPhone', $user->ID));
+        $phoneValue = get_user_option('2faPhone', $user->ID);
 
         echo TemplateEngine::render(
             'UserEditForm.html',
             array(
-                'phoneValue'    => $phoneValue,
+                'phoneValue'    => '+' . $phoneValue,
             )
         );
     }

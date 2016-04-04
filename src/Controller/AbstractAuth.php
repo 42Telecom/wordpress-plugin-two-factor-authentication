@@ -57,10 +57,6 @@ class AbstractAuth
      */
     public function savePhoneNumber($userId)
     {
-        if (!current_user_can('edit_user', $userId)) {
-            return false;
-        }
-
         update_user_option($userId, '2faPhone', self::sanitizePhoneNumber($_POST['2faPhone']));
     }
 
