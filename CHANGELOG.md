@@ -1,6 +1,19 @@
 CHANGELOG
 =========
 
+## Version 1.0.0-RC5
+_2016-04-04_
+- **[IMPROVEMENTS]** Small fixes
+
+## Version 1.0.0-RC4
+_2016-04-04_
+- **[IMPROVEMENTS]** Fixing various bugs
+- **[IMPROVEMENTS]** Adding screenshots for the wordpress plugin website
+
+## Version 1.0.0-RC3
+_2016-04-01_
+- **[IMPROVEMENTS]** Adding assets : banner and icons.
+
 ## Version 1.0.0-RC2
 _2016-03-30_
 - **[IMPROVEMENTS]** Update assets for Wordpress publication
