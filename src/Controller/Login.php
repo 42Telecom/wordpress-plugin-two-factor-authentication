@@ -88,10 +88,11 @@ class Login extends AbstractAuth
         // Try to send Code request
         if (!$errorMsg) {
             try {
+                $phoneValue = esc_attr(get_user_option('2faPhone', $user->ID));
                 $clientRef = 'wordpress' . date('YmdHis');
                 $args = self::buildRequestCodeOption();
                 $ApiRequest = new TwoFactorAuthentication(trim($options['tokenNumber']));
-                $response = $ApiRequest->requestCode($clientRef, '35699982808', $args);
+                $response = $ApiRequest->requestCode($clientRef, $phoneValue, $args);
             } catch (\Exception $e) {
                 $errorMsg = $e->getMessage();
             }
