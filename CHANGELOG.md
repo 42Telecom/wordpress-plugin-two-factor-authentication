@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+## Version 1.0.0-RC6
+_2016-04-04_
+- **[IMPROVEMENTS]** Bump versions for Wordpress
+
 ## Version 1.0.0-RC5
 _2016-04-04_
 - **[IMPROVEMENTS]** Small fixes
