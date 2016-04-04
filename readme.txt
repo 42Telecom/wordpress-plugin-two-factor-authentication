@@ -3,7 +3,7 @@ Contributors: Sebastien Lemarinel
 Tags: 2fa, Two factor authentication, login, register
 Requires at least: 4.4
 Tested up to: 4.4
-Stable tag: 1.0.0-RC3
+Stable tag: 1.0.0-RC6
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
