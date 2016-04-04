@@ -30,14 +30,20 @@ class Login extends AbstractAuth
     {
         $options = get_option('fortytwo2fa');
 
-        if (!isset($options['twoFactorOnLogin']) || ($options['twoFactorOnLogin'] == 'activated')) {
+        if (self::isTwoFactorAvailableOn('login')) {
             if (!TrustedDevice::isTrustedDevice($user->ID)) {
                 if ((count(array_intersect($options['twoFactorByRole'], $user->roles)) > 0) ||
                     (!isset($options['twoFactorByRole']))
                 ) {
-                    wp_clear_auth_cookie();
-                    self::showTwoFactorLogin($user);
-                    exit;
+                    $phoneValue = esc_attr(get_user_option('2faPhone', $user->ID));
+
+                    if (($phoneValue) && ($phoneValue != '')) {
+
+
+                        wp_clear_auth_cookie();
+                        self::showTwoFactorLogin($user);
+                        exit;
+                    }
                 }
             }
         }

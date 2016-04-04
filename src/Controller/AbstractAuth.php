@@ -63,4 +63,26 @@ class AbstractAuth
 
         update_user_option($userId, '2faPhone', self::sanitizePhoneNumber($_POST['2faPhone']));
     }
+
+
+    public function isTwoFactorAvailableOn($action)
+    {
+        $options = get_option('fortytwo2fa');
+
+        // Check if the Token is present
+        if (isset($options['tokenNumber']) && ($options['tokenNumber'] != '')) {
+            // Check the spe
+            if ($action == 'login') {
+                // Check the spe
+                if (!isset($options['twoFactorOnLogin']) || ($options['twoFactorOnLogin'] == 'activated')) {
+                    return true;
+                }
+            } elseif ($action == 'register') {
+                if (!isset($options['twoFactorOnRegister']) || ($options['twoFactorOnRegister'] == 'activated')) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
