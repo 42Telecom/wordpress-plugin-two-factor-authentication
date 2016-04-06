@@ -1,9 +1,14 @@
 CHANGELOG
 =========
 
+## Version 1.0.0-RC7
+_2016-04-06_
+- **[BUG]** Resend SMS no showing on login.
+- **[BUG]** Disable 2FA on register not working properly.
+
 ## Version 1.0.0-RC6
-_2016-04-04_
-- **[IMPROVEMENTS]** Bump versions for Wordpress
+_2016-04-06_
+- **[IMPROVEMENTS]** Updating versions numbers
 
 ## Version 1.0.0-RC5
 _2016-04-04_

@@ -3,7 +3,7 @@ Contributors: Sebastien Lemarinel
 Tags: 2fa, Two factor authentication, login, register
 Requires at least: 4.4
 Tested up to: 4.4
-Stable tag: 1.0.0-RC6
+Stable tag: 1.0.0-RC7
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -43,6 +43,13 @@ The project is managed with Github. So you can report an issues on our [Reposito
 4. Resend the SMS code
 
 == Changelog ==
+
+= 1.0.0-RC7 =
+* Resend SMS no showing on login.
+* Disable 2FA on register not working properly.
+
+= 1.0.0-RC6 =
+- Updating versions numbers
 
 = 1.0.0-RC5 =
 * Small fixes

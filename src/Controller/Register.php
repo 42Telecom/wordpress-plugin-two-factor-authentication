@@ -17,7 +17,7 @@ class Register extends AbstractAuth
      */
     public function __construct()
     {
-        if (self::isTwoFactorAvailableOn('login')) {
+        if (self::isTwoFactorAvailableOn('register')) {
             // Action on register
             // Show the phone number field on the register form
             add_action('register_form', array($this, 'addTwoFactorRegister'), 10, 2);
