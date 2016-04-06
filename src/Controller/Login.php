@@ -35,11 +35,9 @@ class Login extends AbstractAuth
                 if ((count(array_intersect($options['twoFactorByRole'], $user->roles)) > 0) ||
                     (!isset($options['twoFactorByRole']))
                 ) {
+
                     $phoneValue = esc_attr(get_user_option('2faPhone', $user->ID));
-
                     if (($phoneValue) && ($phoneValue != '')) {
-
-
                         wp_clear_auth_cookie();
                         self::showTwoFactorLogin($user);
                         exit;
@@ -130,12 +128,12 @@ class Login extends AbstractAuth
         $resendHtml = TemplateEngine::render('ResendSMSLogin.html');
         if (isset($options['smsResend'])) {
             if ($options['smsResend'] == 'yes') {
-                $resendHtml = $resend;
+                $resendHtml = $resendHtml;
             }
         } else {
-            $resendHtml = $resend;
+            $resendHtml = $resendHtml;
         }
-
+        
         //Hack for capturing the footer
         ob_start();
         do_action('login_footer');
