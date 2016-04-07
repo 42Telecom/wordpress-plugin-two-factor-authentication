@@ -21,7 +21,7 @@ class TrustedDevice
     public function add($userId)
     {
         $deviceId = self::getDeviceId();
-        setcookie(self::TRUSTED_DEVICE_COOKIE_NAME, $deviceId, self::getTime(), "/");
+        setcookie(self::TRUSTED_DEVICE_COOKIE_NAME, $deviceId, self::getTime());
         add_user_meta($userId, self::TRUSTED_DEVICE_KEY, $deviceId);
     }
 
