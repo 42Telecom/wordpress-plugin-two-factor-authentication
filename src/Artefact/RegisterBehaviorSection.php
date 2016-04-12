@@ -27,7 +27,7 @@ class RegisterBehaviorSection implements Section
         // Activate/Disable 2FA on register
         add_settings_field(
             'twoFactorOnRegister',
-            'Activate/disable 2FA on Regsiter:',
+            'Activate/disable 2FA on Register:',
             array($this, 'twoFactorOnRegisterCallback'),
             'fortytwo-2fa-admin',
             'RegisterBehaviorSection'
