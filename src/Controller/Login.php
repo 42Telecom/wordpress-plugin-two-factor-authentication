@@ -20,6 +20,12 @@ class Login extends AbstractAuth
     {
         add_action('wp_login', array($this, 'wpLogin'), 10, 2);
         add_action('login_form_validate_2fa', array($this, 'loginFormValidate2fa'), 10, 2);
+        add_action('login_enqueue_scripts', array($this, 'loginEnqueueScript'), 1);
+    }
+
+    public function loginEnqueueScript()
+    {
+        wp_enqueue_script('jquery');
     }
 
     /**
