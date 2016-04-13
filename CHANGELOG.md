@@ -1,6 +1,17 @@
 CHANGELOG
 =========
 
+## Version 1.0.0-RC8
+_2016-04-12_
+- **[BUG]** Add missing jquery dependency on login
+- **[BUG]** Fix Trusted device Activate/Disabled option
+- **[BUG]** Fix naming convention for Authentication code
+- **[IMPROVEMENT]** Update in code documentation
+- **[IMPROVEMENT]** Adding field validation in the settings
+- **[BUG]** Fix missing dependency - Jquery
+- **[BUG]** Fix a typo on setting panel.
+- **[BUG]** Fix a bug with the cookie path.
+
 ## Version 1.0.0-RC7
 _2016-04-06_
 - **[BUG]** Resend SMS no showing on login.
