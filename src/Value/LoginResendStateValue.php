@@ -30,4 +30,18 @@ class LoginResendStateValue extends AbstractCollectionValue implements ValueInte
      * @inheritDoc
      */
     protected $fieldId = 'smsResend';
+
+    /**
+     * True if the field is in the active state or false if is not.
+     *
+     * @return bool Status : true = activated, false = disabled
+     */
+    public function isActive()
+    {
+        if ($this->value == 'yes') {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

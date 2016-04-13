@@ -6,6 +6,8 @@ use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Utils\Nonce;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Utils\TemplateEngine;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Utils\TrustedDevice;
 use Fortytwo\SDK\TwoFactorAuthentication\TwoFactorAuthentication;
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\TrustedStateValue;
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\LoginResendStateValue;
 
 /**
  * Set Login 2fa step UI and add logic
@@ -124,14 +126,18 @@ class Login extends AbstractAuth
             )
         );
 
+        // Trusted Device Section
+        $trustedDevice = new TrustedStateValue();
+        $trustedDeviceSection = '';
+        if ($trustedDevice->isActive()) {
+            $trustedDeviceSection = TemplateEngine::render('TrustedDevice.html');
+        }
+
         // Add part to resend SMS
-        $resendHtml = TemplateEngine::render('ResendSMSLogin.html');
-        if (isset($options['smsResend'])) {
-            if ($options['smsResend'] == 'yes') {
-                $resendHtml = $resendHtml;
-            }
-        } else {
-            $resendHtml = $resendHtml;
+        $resendSMSLogin = new LoginResendStateValue();
+        $resendSMSLoginSection = '';
+        if ($resendSMSLogin->isActive()) {
+            $resendSMSLoginSection = TemplateEngine::render('ResendSMSLogin.html');
         }
 
         //Hack for capturing the footer
@@ -161,8 +167,9 @@ class Login extends AbstractAuth
                 'HomeUrlLabel'  => esc_html(sprintf(__('&larr; Back to %s'), get_bloginfo('title', 'display'))),
                 'wpFooter'      => $wpFooter,
                 'clientRef'     => $clientRef,
-                'resendSMS'     => $resendHtml,
-                'digits'        => $digits
+                'resendSMS'     => $resendSMSLoginSection,
+                'digits'        => $digits,
+                'trustedDevice' => $trustedDeviceSection
             )
         );
     }

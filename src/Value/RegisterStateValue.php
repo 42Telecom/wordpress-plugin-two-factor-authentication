@@ -30,4 +30,18 @@ class RegisterStateValue extends AbstractCollectionValue implements ValueInterfa
      * @inheritDoc
      */
     protected $fieldId = 'twoFactorOnRegister';
+
+    /**
+     * True if the field is in the active state or false if is not.
+     *
+     * @return bool Status : true = activated, false = disabled
+     */
+    public function isActive()
+    {
+        if ($this->value == 'activated') {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
