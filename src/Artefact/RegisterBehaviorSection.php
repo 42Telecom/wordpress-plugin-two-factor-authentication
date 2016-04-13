@@ -1,14 +1,15 @@
 <?php
 namespace Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Artefact;
 
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Interfaces\Section;
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Interfaces\SectionInterface;
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\RegisterStateValue;
 
 /**
- * Implement Section for the Register behavior
+ * Implement SectionInterface for the Register behavior
  *
  * @license https://opensource.org/licenses/MIT MIT
  */
-class RegisterBehaviorSection implements Section
+class RegisterBehaviorSection implements SectionInterface
 {
     /**
      * @inheritDoc
@@ -27,7 +28,7 @@ class RegisterBehaviorSection implements Section
         // Activate/Disable 2FA on register
         add_settings_field(
             'twoFactorOnRegister',
-            'Activate/disable 2FA on Regsiter:',
+            'Activate/disable 2FA on Register:',
             array($this, 'twoFactorOnRegisterCallback'),
             'fortytwo-2fa-admin',
             'RegisterBehaviorSection'
@@ -47,20 +48,15 @@ class RegisterBehaviorSection implements Section
      */
     public function twoFactorOnRegisterCallback()
     {
-        $options = get_option('fortytwo2fa');
+        $state = new RegisterStateValue();
 
         $html = '<select id="twoFactorOnRegister" name="fortytwo2fa[twoFactorOnRegister]" >';
-        if (isset($options['twoFactorOnRegister'])) {
-            if ($options['twoFactorOnRegister'] == 'activated') {
-                $html.= '<option selected="selected" value="activated">Activated</option>';
-                $html.= '<option value="disabled">Disabled</option>';
-            } else {
-                $html.= '<option value="activated">Activated</option>';
-                $html.= '<option selected="selected" value="disabled">Disabled</option>';
-            }
-        } else {
+        if ((string)$state == 'activated') {
             $html.= '<option selected="selected" value="activated">Activated</option>';
             $html.= '<option value="disabled">Disabled</option>';
+        } else {
+            $html.= '<option value="activated">Activated</option>';
+            $html.= '<option selected="selected" value="disabled">Disabled</option>';
         }
         $html.= '</select>';
         echo $html;

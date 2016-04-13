@@ -3,7 +3,7 @@ Contributors: Sebastien Lemarinel
 Tags: 2fa, Two factor authentication, login, register
 Requires at least: 4.4
 Tested up to: 4.4
-Stable tag: 1.0.0-RC7
+Stable tag: 1.0.0-RC8
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -43,6 +43,17 @@ The project is managed with Github. So you can report an issues on our [Reposito
 4. Resend the SMS code
 
 == Changelog ==
+
+
+= 1.0.0-RC8 =
+- [BUG] Add missing jquery dependency on login
+- [BUG] Fix Trusted device Activate/Disabled option
+- [BUG] Fix naming convention for Authentication code
+- [IMPROVEMENT] Update in code documentation
+- [IMPROVEMENT] Adding field validation in the settings
+- [BUG] Fix missing dependency - Jquery
+- [BUG] Fix a typo on setting panel.
+- [BUG] Fix a bug with the cookie path.
 
 = 1.0.0-RC7 =
 * Resend SMS no showing on login.

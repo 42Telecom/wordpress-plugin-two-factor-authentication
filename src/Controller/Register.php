@@ -94,7 +94,8 @@ class Register extends AbstractAuth
     {
         wp_enqueue_script(
             'fortytwo_two_factor_javascript_intlTelInput',
-            plugin_dir_url(__FILE__) . '../Javascript/intlTelInput.min.js'
+            plugin_dir_url(__FILE__) . '../Javascript/intlTelInput.min.js',
+            array('jquery')
         );
         wp_enqueue_script(
             'fortytwo_two_factor_javascript_utils',
