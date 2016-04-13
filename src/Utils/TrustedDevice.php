@@ -1,6 +1,8 @@
 <?php
 namespace Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Utils;
 
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\TrustedStateValue;
+
 /**
  * Manage the trusted device functionality.
  */
@@ -16,19 +18,19 @@ class TrustedDevice
      * Add a new device as trusted, setting up a cookie on the machine and
      * adding the id on the meta user.
      *
-     * @param integer $userId User Id.
+     * @param int $userId User Id.
      */
     public function add($userId)
     {
         $deviceId = self::getDeviceId();
-        setcookie(self::TRUSTED_DEVICE_COOKIE_NAME, $deviceId, self::getTime(), "/");
+        setcookie(self::TRUSTED_DEVICE_COOKIE_NAME, $deviceId, self::getTime());
         add_user_meta($userId, self::TRUSTED_DEVICE_KEY, $deviceId);
     }
 
     /**
      * Remove the specified device
      *
-     * @param integer $userId User Id.
+     * @param int $userId User Id.
      * @param string  $deviceId saved Id of the device
      */
     public function remove($userId, $deviceId)
@@ -39,7 +41,7 @@ class TrustedDevice
     /**
      * Return a list of trusted device
      *
-     * @param integer $userId User Id.
+     * @param int $userId User Id.
      */
     public function collection($userId)
     {
@@ -49,24 +51,26 @@ class TrustedDevice
     /**
      * Check if the device is trusted
      *
-     * @param integer @userId User ID
+     * @param int @userId User ID
      *
-     * @return boolean true if the device is trusted or not if is not.
+     * @return bool true if the device is trusted or not if is not.
      */
     public function isTrustedDevice($userId)
     {
-        if (isset($_COOKIE[self::TRUSTED_DEVICE_COOKIE_NAME])) {
-            $deviceId = $_COOKIE[self::TRUSTED_DEVICE_COOKIE_NAME];
-            $trustedDevices = get_user_meta($userId, self::TRUSTED_DEVICE_KEY);
+        $trustedValue = new TrustedStateValue();
 
-            if (in_array($deviceId, $trustedDevices)) {
-                return true;
-            } else {
-                return false;
+        if ($trustedValue->isActive()) {
+            if (isset($_COOKIE[self::TRUSTED_DEVICE_COOKIE_NAME])) {
+                $deviceId = $_COOKIE[self::TRUSTED_DEVICE_COOKIE_NAME];
+                $trustedDevices = get_user_meta($userId, self::TRUSTED_DEVICE_KEY);
+
+                if (in_array($deviceId, $trustedDevices)) {
+                    return true;
+                }
             }
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**

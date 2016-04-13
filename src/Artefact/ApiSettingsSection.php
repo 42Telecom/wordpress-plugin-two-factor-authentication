@@ -1,14 +1,19 @@
 <?php
 namespace Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Artefact;
 
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Interfaces\Section;
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Interfaces\SectionInterface;
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICodeLengthValue;
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICodeTypeValue;
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICustomSenderIDValue;
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICodeCaseSensitiveValue;
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICallBackUrlValue;
 
 /**
- * Implement Section for the API Settings
+ * Implement SectionInterface for the API Settings
  *
  * @license https://opensource.org/licenses/MIT MIT
  */
-class ApiSettingsSection implements Section
+class ApiSettingsSection implements SectionInterface
 {
     /**
      * @inheritDoc
@@ -79,22 +84,14 @@ class ApiSettingsSection implements Section
      */
     public function apiCodeLengthCallback()
     {
-        $options = get_option('fortytwo2fa');
+        $codeLength = new APICodeLengthValue();
 
         $html = '<select id="apiCodeLength" name="fortytwo2fa[apiCodeLength]" >';
-        for ($i=6; $i<=20; $i++) {
-            if (isset($options['apiCodeLength'])) {
-                if ($options['apiCodeLength'] == $i) {
-                    $html.= '<option selected="selecte" value="' . $i . '" >' . $i . '</option>';
-                } else {
-                    $html.= '<option value="' . $i . '" >' . $i . '</option>';
-                }
+        foreach ($codeLength->getOptions() as $value) {
+            if ($codeLength == $value) {
+                $html.= '<option selected="selecte" value="' . $value . '" >' . $value . '</option>';
             } else {
-                if ($i == 6) {
-                    $html.= '<option selected="selecte"  value="' . $i . '" >' . $i . '</option>';
-                } else {
-                    $html.= '<option value="' . $i . '" >' . $i . '</option>';
-                }
+                $html.= '<option value="' . $value . '" >' . $value . '</option>';
             }
         }
         $html.= '</select>';
@@ -106,25 +103,15 @@ class ApiSettingsSection implements Section
      */
     public function apiCodeTypeCallback()
     {
-        $options = get_option('fortytwo2fa');
+        $codeType = new APICodeTypeValue();
 
         $html = '<select id="apiCodeType" name="fortytwo2fa[apiCodeType]" >';
 
-        $codeTypes = ['numeric', 'alpha', 'alphanumeric'];
-
-        foreach ($codeTypes as $value) {
-            if (isset($options['apiCodeType'])) {
-                if ($options['apiCodeType'] == $value) {
-                    $html.= '<option selected="selecte" value="' . $value . '" >' . $value . '</option>';
-                } else {
-                    $html.= '<option value="' . $value . '" >' . $value . '</option>';
-                }
+        foreach ($codeType->getOptions() as $value) {
+            if ((string)$codeType == $value) {
+                $html.= '<option selected="selecte" value="' . $value . '" >' . $value . '</option>';
             } else {
-                if ($value == 'numeric') {
-                    $html.= '<option selected="selecte"  value="' . $value . '" >' . $value . '</option>';
-                } else {
-                    $html.= '<option value="' . $value . '" >' . $value . '</option>';
-                }
+                $html.= '<option value="' . $value . '" >' . $value . '</option>';
             }
         }
         $html.= '</select>';
@@ -136,22 +123,16 @@ class ApiSettingsSection implements Section
      */
     public function apiCaseSensitiveCallback()
     {
-        $options = get_option('fortytwo2fa');
+        $codeCaseSensitive = new APICodeCaseSensitiveValue();
 
         $html = '<select id="apiCodeType" name="fortytwo2fa[apiCaseSensitive]" >';
-        if (isset($options['apiCaseSensitive'])) {
-            if ($options['apiCaseSensitive'] == 'true') {
-                $html.= '<option value="true" selected="selected" >Yes</option>';
-                $html.= '<option value="false" >No</option>';
-            } else {
-                $html.= '<option value="true" >Yes</option>';
-                $html.= '<option value="false" selected="selected" >No</option>';
-            }
+        if ((string)$codeCaseSensitive == 'true') {
+            $html.= '<option value="true" selected="selected" >Yes</option>';
+            $html.= '<option value="false" >No</option>';
         } else {
             $html.= '<option value="true" >Yes</option>';
             $html.= '<option value="false" selected="selected" >No</option>';
         }
-
         $html.= '</select>';
         echo $html;
     }
@@ -161,11 +142,11 @@ class ApiSettingsSection implements Section
      */
     public function apiCallbackUrlCallback()
     {
-        $options = get_option('fortytwo2fa');
+        $callbackurl = new APICallBackUrlValue();
 
         printf(
             '<input type="text" id="apiCallbackUrl" name="fortytwo2fa[apiCallbackUrl]" value="%s" />',
-            isset($options['apiCallbackUrl']) ? esc_attr($options['apiCallbackUrl']) : ''
+            $callbackurl
         );
     }
 
@@ -174,11 +155,13 @@ class ApiSettingsSection implements Section
      */
     public function apiSenderIdCallback()
     {
-        $options = get_option('fortytwo2fa');
+        $senderID = new APICustomSenderIDValue();
 
         printf(
-            '<input type="text" id="apiSenderId" name="fortytwo2fa[apiSenderId]" value="%s" />',
-            isset($options['apiSenderId']) ? esc_attr($options['apiSenderId']) : ''
+            '<input type="text" id="apiSenderId" name="fortytwo2fa[apiSenderId]" value="%s" />
+            <br>
+            <small>Only Alphanumeric and numeric are accepted. Max characters for numeric is 15 & alphanumeric is 11.</small>',
+            $senderID
         );
     }
 }

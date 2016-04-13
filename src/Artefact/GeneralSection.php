@@ -1,20 +1,24 @@
 <?php
 namespace Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Artefact;
 
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Interfaces\Section;
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Interfaces\SectionInterface;
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\TokenValue;
 
 /**
- * Implement Section for the General section
+ * Implement SectionInterface for the General section
  *
  * @license https://opensource.org/licenses/MIT MIT
  */
-class GeneralSection implements Section
+class GeneralSection implements SectionInterface
 {
     /**
      * @inheritDoc
      */
     public function add()
     {
+
+
+
         // Add the General section
         add_settings_section(
             'GeneralSection',
@@ -32,6 +36,8 @@ class GeneralSection implements Section
             'GeneralSection'
         );
 
+
+
         return $this;
     }
 
@@ -48,11 +54,11 @@ class GeneralSection implements Section
      */
     public function tokenCallback()
     {
-        $options = get_option('fortytwo2fa');
+        $token = new TokenValue();
 
         printf(
             '<input type="text" id="tokenNumber" name="fortytwo2fa[tokenNumber]" value="%s" />',
-            isset($options['tokenNumber']) ? esc_attr($options['tokenNumber']) : ''
+            isset($token) ? esc_attr($token) : ''
         );
     }
 }

@@ -6,6 +6,8 @@ use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Utils\Nonce;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Utils\TemplateEngine;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Utils\TrustedDevice;
 use Fortytwo\SDK\TwoFactorAuthentication\TwoFactorAuthentication;
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\TrustedStateValue;
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\LoginResendStateValue;
 
 /**
  * Set Login 2fa step UI and add logic
@@ -18,13 +20,19 @@ class Login extends AbstractAuth
     {
         add_action('wp_login', array($this, 'wpLogin'), 10, 2);
         add_action('login_form_validate_2fa', array($this, 'loginFormValidate2fa'), 10, 2);
+        add_action('login_enqueue_scripts', array($this, 'loginEnqueueScript'), 1);
+    }
+
+    public function loginEnqueueScript()
+    {
+        wp_enqueue_script('jquery');
     }
 
     /**
      * Handle the browser-based login.
      *
      * @param string  $user_login Username.
-     * @param WP_User $user WP_User object of the logged-in user.
+     * @param object $user WP_User object of the logged-in user.
      */
     public function wpLogin($user_login, $user)
     {
@@ -50,7 +58,7 @@ class Login extends AbstractAuth
     /**
      * Display the login form.
      *
-     * @param WP_User $user WP_User object of the logged-in user.
+     * @param object $user WP_User object of the logged-in user.
      */
     public static function showTwoFactorLogin($user)
     {
@@ -74,7 +82,7 @@ class Login extends AbstractAuth
     /**
      * Generates the html form for the second step of the authentication process.
      *
-     * @param WP_User       $user WP_User object of the logged-in user.
+     * @param object        $user WP_User object of the logged-in user.
      * @param string        $loginNonce A string nonce stored in usermeta.
      * @param string        $redirectTo The URL to which the user would like to be redirected.
      * @param string        $errorMsg Optional. Login error message.
@@ -124,16 +132,20 @@ class Login extends AbstractAuth
             )
         );
 
-        // Add part to resend SMS
-        $resendHtml = TemplateEngine::render('ResendSMSLogin.html');
-        if (isset($options['smsResend'])) {
-            if ($options['smsResend'] == 'yes') {
-                $resendHtml = $resendHtml;
-            }
-        } else {
-            $resendHtml = $resendHtml;
+        // Trusted Device Section
+        $trustedDevice = new TrustedStateValue();
+        $trustedDeviceSection = '';
+        if ($trustedDevice->isActive()) {
+            $trustedDeviceSection = TemplateEngine::render('TrustedDevice.html');
         }
-        
+
+        // Add part to resend SMS
+        $resendSMSLogin = new LoginResendStateValue();
+        $resendSMSLoginSection = '';
+        if ($resendSMSLogin->isActive()) {
+            $resendSMSLoginSection = TemplateEngine::render('ResendSMSLogin.html');
+        }
+
         //Hack for capturing the footer
         ob_start();
         do_action('login_footer');
@@ -161,8 +173,9 @@ class Login extends AbstractAuth
                 'HomeUrlLabel'  => esc_html(sprintf(__('&larr; Back to %s'), get_bloginfo('title', 'display'))),
                 'wpFooter'      => $wpFooter,
                 'clientRef'     => $clientRef,
-                'resendSMS'     => $resendHtml,
-                'digits'        => $digits
+                'resendSMS'     => $resendSMSLoginSection,
+                'digits'        => $digits,
+                'trustedDevice' => $trustedDeviceSection
             )
         );
     }
@@ -271,8 +284,8 @@ class Login extends AbstractAuth
     /**
      * Login failed when the SMS code is not good.
      *
-     * @param Object $user Wordpress user object
-     * @param String $message Error message
+     * @param object $user Wordpress user object
+     * @param string $message Error message
      */
     public function loginFailed($user, $message = 'ERROR: Invalid verification code.')
     {

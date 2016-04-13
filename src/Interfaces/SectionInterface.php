@@ -4,7 +4,7 @@ namespace Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Interfaces;
 /**
  * Define the section interface.
  */
-interface Section
+interface SectionInterface
 {
     /**
      * Add section in the wordpress admin page
