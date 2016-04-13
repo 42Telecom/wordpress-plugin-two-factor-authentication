@@ -1,14 +1,17 @@
 <?php
 namespace Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Artefact;
 
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Interfaces\Section;
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Interfaces\SectionInterface;
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\LoginUsersValue;
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\LoginStateValue;
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\LoginResendStateValue;
 
 /**
- * Implement Section for the Login Behavior
+ * Implement SectionInterface for the Login Behavior
  *
  * @license https://opensource.org/licenses/MIT MIT
  */
-class LoginBehaviorSection implements Section
+class LoginBehaviorSection implements SectionInterface
 {
     /**
      * @inheritDoc
@@ -70,20 +73,15 @@ class LoginBehaviorSection implements Section
      */
     public function twoFactorOnLoginCallback()
     {
-        $options = get_option('fortytwo2fa');
+        $loginState = new LoginStateValue();
 
         $html = '<select id="twoFactorOnLogin" name="fortytwo2fa[twoFactorOnLogin]" >';
-        if (isset($options['twoFactorOnLogin'])) {
-            if ($options['twoFactorOnLogin'] == 'activated') {
-                $html.= '<option selected="selected" value="activated">Activated</option>';
-                $html.= '<option value="Disabled">Disabled</option>';
-            } else {
-                $html.= '<option value="activated">Activated</option>';
-                $html.= '<option selected="selected" value="Disabled">Disabled</option>';
-            }
-        } else {
+        if ((string)$loginState == 'activated') {
             $html.= '<option selected="selected" value="activated">Activated</option>';
-            $html.= '<option value="Disabled">Disabled</option>';
+            $html.= '<option value="disabled">Disabled</option>';
+        } else {
+            $html.= '<option value="activated">Activated</option>';
+            $html.= '<option selected="selected" value="disabled">Disabled</option>';
         }
         $html.= '</select>';
         echo $html;
@@ -94,20 +92,15 @@ class LoginBehaviorSection implements Section
      */
     public function resendSMSCallback()
     {
-        $options = get_option('fortytwo2fa');
+        $smsResend = new LoginResendStateValue();
 
         $html = '<select id="smsResend" name="fortytwo2fa[smsResend]" >';
-        if (isset($options['smsResend'])) {
-            if ($options['smsResend'] == 'yes') {
-                $html.= '<option selected="selected" value="yes">Yes</option>';
-                $html.= '<option value="no">No</option>';
-            } else {
-                $html.= '<option value="yes">Yes</option>';
-                $html.= '<option selected="selected" value="no">No</option>';
-            }
-        } else {
+        if ((string)$smsResend == 'yes') {
             $html.= '<option selected="selected" value="yes">Yes</option>';
             $html.= '<option value="no">No</option>';
+        } else {
+            $html.= '<option value="yes">Yes</option>';
+            $html.= '<option selected="selected" value="no">No</option>';
         }
         $html.= '</select>';
         echo $html;
@@ -118,16 +111,16 @@ class LoginBehaviorSection implements Section
      */
     public function twoFactorByRoleCallback()
     {
-        $options = get_option('fortytwo2fa');
-
+        $rolesObj = new LoginUsersValue();
+        $roles = $rolesObj->getValues();
         $html ='<select  id="twoFactorByRole" name="fortytwo2fa[twoFactorByRole][]"  size="5" multiple>';
         $select = '';
 
         $editable_roles = array_reverse(get_editable_roles());
-        if (isset($options['twoFactorByRole'])) {
+        if (count($roles) > 0) {
             foreach ($editable_roles as $role => $details) {
                 $name = translate_user_role($details['name']);
-                if (in_array($role, $options['twoFactorByRole'])) {
+                if (in_array($role, $roles)) {
                     $select .= '<option selected="selected" value="' . esc_attr($role) . '"> ' . $name . '</option>';
                 } else {
                     $select .= '<option value="' . esc_attr($role) . '">' . $name . '</option>';

@@ -133,7 +133,7 @@ class Login extends AbstractAuth
         } else {
             $resendHtml = $resendHtml;
         }
-        
+
         //Hack for capturing the footer
         ob_start();
         do_action('login_footer');

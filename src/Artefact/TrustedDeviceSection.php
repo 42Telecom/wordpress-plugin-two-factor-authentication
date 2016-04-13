@@ -1,14 +1,16 @@
 <?php
 namespace Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Artefact;
 
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Interfaces\Section;
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Interfaces\SectionInterface;
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\TrustedTTLValue;
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\TrustedStateValue;
 
 /**
- * Implement Section for the Trusted devices
+ * Implement SectionInterface for the Trusted devices
  *
  * @license https://opensource.org/licenses/MIT MIT
  */
-class TrustedDeviceSection implements Section
+class TrustedDeviceSection implements SectionInterface
 {
     /**
      * @inheritDoc
@@ -57,20 +59,16 @@ class TrustedDeviceSection implements Section
      */
     public function trustedDeviceOptionCallback()
     {
-        $options = get_option('fortytwo2fa');
+        $trustedState = new TrustedStateValue();
 
         $html = '<select id="trustedDeviceOption" name="fortytwo2fa[trustedDeviceOption]" >';
-        if (isset($options['trustedDeviceOption'])) {
-            if ($options['trustedDeviceOption'] == 'activated') {
-                $html.= '<option selected="selected" value="activated">Activated</option>';
-                $html.= '<option value="Disabled">Disabled</option>';
-            } else {
-                $html.= '<option value="activated">Activated</option>';
-                $html.= '<option selected="selected" value="Disabled">Disabled</option>';
-            }
-        } else {
+
+        if ((string)$trustedState == 'activated') {
             $html.= '<option selected="selected" value="activated">Activated</option>';
-            $html.= '<option value="Disabled">Disabled</option>';
+            $html.= '<option value="disabled">Disabled</option>';
+        } else {
+            $html.= '<option value="activated">Activated</option>';
+            $html.= '<option selected="selected" value="disabled">Disabled</option>';
         }
         $html.= '</select>';
         echo $html;
@@ -81,22 +79,14 @@ class TrustedDeviceSection implements Section
      */
     public function trustedDeviceTimeOutCallback()
     {
-        $options = get_option('fortytwo2fa');
+        $trustedTTL = new TrustedTTLValue;
 
         $html = '<select id="trustedDeviceTimeOut" name="fortytwo2fa[trustedDeviceTimeOut]" >';
-        for ($i=10; $i<=60; $i+=10) {
-            if (isset($options['trustedDeviceTimeOut'])) {
-                if ($options['trustedDeviceTimeOut'] == $i) {
-                    $html.= '<option selected="selecte" value="' . $i . '" >' . $i . ' days</option>';
-                } else {
-                    $html.= '<option value="' . $i . '" >' . $i . ' days</option>';
-                }
+        foreach ($trustedTTL->getOptions() as $value) {
+            if ((string)$trustedTTL == $value) {
+                $html.= '<option selected="selecte" value="' . $value . '" >' . $value . ' days</option>';
             } else {
-                if ($i == 6) {
-                    $html.= '<option selected="selecte"  value="' . $i . '" >' . $i . ' days</option>';
-                } else {
-                    $html.= '<option value="' . $i . '" >' . $i . ' days</option>';
-                }
+                $html.= '<option value="' . $value . '" >' . $value . ' days</option>';
             }
         }
         $html.= '</select>';
