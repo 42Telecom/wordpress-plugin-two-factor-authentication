@@ -37,7 +37,11 @@ class LoginUsersValue extends AbstractValue implements ValueInterface
         }
     }
 
-
+    /**
+     * Get the roles saved.
+     *
+     * @return array list of selected roles.
+     */
     public function getValues()
     {
         return $this->roles;

@@ -2,26 +2,34 @@
 namespace Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value;
 
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Interfaces\ValueInterface;
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\AbstractValue;
 
 /**
  * Class for the Token Value.
  *
  * @license https://opensource.org/licenses/MIT MIT
  */
-class TokenValue implements ValueInterface
+class TokenValue extends AbstractValue implements ValueInterface
 {
     /**
      * @var string
      */
-    private $token = '';
+    protected $value = '';
+
+    /**
+     * @inheritDoc
+     */
+    protected $fieldName = 'Token';
+
+    /**
+     * @inheritDoc
+     */
+    protected $fieldId = 'tokenNumber';
+
     /**
      * @var string
      */
     private $regex = "/^([a-z0-9]*-[a-z0-9]*-[a-z0-9]*-[a-z0-9]*-[a-z0-9]*)$/";
-    /**
-     * @var string
-     */
-    private $fieldName = 'tokenNumber';
 
 
     /**
@@ -31,29 +39,21 @@ class TokenValue implements ValueInterface
     {
         if ($value) {
             if (preg_match($this->regex, $value)) {
-                $this->token = $value;
+                $this->value = $value;
             } else {
                 add_settings_error(
                     'fortytwo2fa',
-                    esc_attr($this->fieldName),
-                    'Wrong Token format',
+                    esc_attr($this->fieldId),
+                    'Wrong ' . $this->fieldName . ' format',
                     'error'
                 );
             }
         } else {
             $options = get_option('fortytwo2fa');
 
-            if (isset($options[$this->fieldName])) {
-                $this->token = $options[$this->fieldName];
+            if (isset($options[$this->fieldId])) {
+                $this->value = $options[$this->fieldId];
             }
         }
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function __toString()
-    {
-        return $this->token;
     }
 }

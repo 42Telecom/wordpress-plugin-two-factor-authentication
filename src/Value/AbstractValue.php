@@ -4,7 +4,7 @@ namespace Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Interfaces\ValueInterface;
 
 /**
- * Abstract class for the State values.
+ * Abstract class for the values.
  *
  * @license https://opensource.org/licenses/MIT MIT
  */

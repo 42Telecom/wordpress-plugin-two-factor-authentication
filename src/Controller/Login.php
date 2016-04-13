@@ -24,7 +24,7 @@ class Login extends AbstractAuth
      * Handle the browser-based login.
      *
      * @param string  $user_login Username.
-     * @param WP_User $user WP_User object of the logged-in user.
+     * @param object $user WP_User object of the logged-in user.
      */
     public function wpLogin($user_login, $user)
     {
@@ -50,7 +50,7 @@ class Login extends AbstractAuth
     /**
      * Display the login form.
      *
-     * @param WP_User $user WP_User object of the logged-in user.
+     * @param object $user WP_User object of the logged-in user.
      */
     public static function showTwoFactorLogin($user)
     {
@@ -74,7 +74,7 @@ class Login extends AbstractAuth
     /**
      * Generates the html form for the second step of the authentication process.
      *
-     * @param WP_User       $user WP_User object of the logged-in user.
+     * @param object        $user WP_User object of the logged-in user.
      * @param string        $loginNonce A string nonce stored in usermeta.
      * @param string        $redirectTo The URL to which the user would like to be redirected.
      * @param string        $errorMsg Optional. Login error message.
@@ -271,8 +271,8 @@ class Login extends AbstractAuth
     /**
      * Login failed when the SMS code is not good.
      *
-     * @param Object $user Wordpress user object
-     * @param String $message Error message
+     * @param object $user Wordpress user object
+     * @param string $message Error message
      */
     public function loginFailed($user, $message = 'ERROR: Invalid verification code.')
     {

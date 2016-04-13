@@ -5,7 +5,7 @@ use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Interfaces\ValueInterface;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\AbstractCollectionValue;
 
 /**
- * Class for API Code length value.
+ * Class for API Code type value.
  *
  * @license https://opensource.org/licenses/MIT MIT
  */

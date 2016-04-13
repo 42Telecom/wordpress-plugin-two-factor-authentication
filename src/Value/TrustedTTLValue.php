@@ -11,8 +11,6 @@ use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\AbstractCollectionVa
  */
 class TrustedTTLValue extends AbstractCollectionValue implements ValueInterface
 {
-
-
     /**
      * @inheritDoc
      */

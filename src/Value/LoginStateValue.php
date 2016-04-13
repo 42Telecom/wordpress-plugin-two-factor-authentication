@@ -4,6 +4,11 @@ namespace Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Interfaces\ValueInterface;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\AbstractCollectionValue;
 
+/**
+ * Class for the Login state Value.
+ *
+ * @license https://opensource.org/licenses/MIT MIT
+ */
 class LoginStateValue extends AbstractCollectionValue implements ValueInterface
 {
     /**

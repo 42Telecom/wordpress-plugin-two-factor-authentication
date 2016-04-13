@@ -5,15 +5,20 @@ use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Interfaces\ValueInterface;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\AbstractValue;
 
 /**
- * Class for the Token Value.
+ * Class for the API Custome sender ID Value.
  *
  * @license https://opensource.org/licenses/MIT MIT
  */
 class APICustomSenderIDValue extends AbstractValue implements ValueInterface
 {
-
+    /**
+     * @var int
+     */
     private $numericLimit = 15;
 
+    /**
+     * @var int
+     */
     private $alphanumericLimit = 11;
 
     /**

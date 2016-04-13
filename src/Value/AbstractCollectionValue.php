@@ -5,7 +5,7 @@ use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Interfaces\ValueInterface;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\AbstractValue;
 
 /**
- * Abstract class for the State values.
+ * Abstract class for the Collection values.
  *
  * @license https://opensource.org/licenses/MIT MIT
  */
@@ -15,7 +15,7 @@ abstract class AbstractCollectionValue extends AbstractValue implements ValueInt
      * @var array
      */
     protected $collection = array();
-    
+
     /**
      * @inheritDoc
      */

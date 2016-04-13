@@ -2,9 +2,14 @@
 namespace Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value;
 
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Interfaces\ValueInterface;
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\AbstractStateValue;
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\AbstractCollectionValue;
 
-class TrustedStateValue extends AbstractStateValue implements ValueInterface
+/**
+ * Class for the Trusted state Value.
+ *
+ * @license https://opensource.org/licenses/MIT MIT
+ */
+class TrustedStateValue extends AbstractCollectionValue implements ValueInterface
 {
     /**
      * @inheritDoc

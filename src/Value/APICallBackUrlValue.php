@@ -5,7 +5,7 @@ use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Interfaces\ValueInterface;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\AbstractValue;
 
 /**
- * Class for the Token Value.
+ * Class for the API Callback url Value.
  *
  * @license https://opensource.org/licenses/MIT MIT
  */
