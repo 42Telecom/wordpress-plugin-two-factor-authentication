@@ -20,6 +20,7 @@ class Login extends AbstractAuth
     {
         add_action('wp_login', array($this, 'wpLogin'), 10, 2);
         add_action('login_form_validate_2fa', array($this, 'loginFormValidate2fa'), 10, 2);
+        add_action('login_form_resend_2fa', array($this, 'resendSMS'), 10, 2);
         add_action('login_enqueue_scripts', array($this, 'loginEnqueueScript'), 1);
     }
 
@@ -36,6 +37,33 @@ class Login extends AbstractAuth
      */
     public function wpLogin($user_login, $user)
     {
+        if ($user) {
+            self::showTwoFactorLogin($user);
+        }
+        exit;
+    }
+
+    /**
+     * Handle resend request
+     */
+    public function resendSMS()
+    {
+        $user = get_userdata(intval($_POST['wp-auth-id']));
+
+        if ($user) {
+            self::showTwoFactorLogin($user);
+        }
+        exit;
+    }
+
+
+    /**
+     * Display the login form.
+     *
+     * @param object $user WP_User object of the logged-in user.
+     */
+    public static function showTwoFactorLogin($user)
+    {
         $options = get_option('fortytwo2fa');
 
         if (self::isTwoFactorAvailableOn('login')) {
@@ -47,36 +75,28 @@ class Login extends AbstractAuth
                     $phoneValue = esc_attr(get_user_option('2faPhone', $user->ID));
                     if (($phoneValue) && ($phoneValue != '')) {
                         wp_clear_auth_cookie();
-                        self::showTwoFactorLogin($user);
+
+                        if (!$user) {
+                            $user = wp_get_current_user();
+                        }
+
+                        $nonce = new Nonce();
+                        $loginNonce = $nonce->create($user->ID);
+
+                        if (!$loginNonce) {
+                            wp_die(esc_html__('Could not save login nonce.'));
+                        }
+
+                        $redirectTo = isset($_REQUEST['redirect_to']) ? $_REQUEST['redirect_to'] : $_SERVER['REQUEST_URI'];
+
+                        self::loginHtml($user, $loginNonce['key'], $redirectTo);
                         exit;
                     }
                 }
             }
         }
-    }
 
-    /**
-     * Display the login form.
-     *
-     * @param object $user WP_User object of the logged-in user.
-     */
-    public static function showTwoFactorLogin($user)
-    {
-        if (!$user) {
-            $user = wp_get_current_user();
-        }
 
-        $nonce = new Nonce();
-        $loginNonce = $nonce->create($user->ID);
-
-        if (!$loginNonce) {
-            wp_die(esc_html__('Could not save login nonce.'));
-        }
-
-        $redirectTo = isset($_REQUEST['redirect_to']) ? $_REQUEST['redirect_to'] : $_SERVER['REQUEST_URI'];
-
-        self::loginHtml($user, $loginNonce['key'], $redirectTo);
-        exit;
     }
 
     /**
@@ -104,7 +124,7 @@ class Login extends AbstractAuth
             }
         }
 
-        $interimLogin = isset($_REQUEST['interim-login']);
+        $interimLogin = false; //isset($_REQUEST['interim-login']);
 
         // Save rememberme option
         $rememberme = 0;
@@ -140,12 +160,34 @@ class Login extends AbstractAuth
         }
 
         // Add part to resend SMS
+        // Set form action url
+        $formResendAction = esc_url(
+            set_url_scheme(
+                add_query_arg(
+                    'action',
+                    'resend_2fa',
+                    wp_login_url()
+                ),
+                'login_post'
+            )
+        );
+
         $resendSMSLogin = new LoginResendStateValue();
         $resendSMSLoginSection = '';
         if ($resendSMSLogin->isActive()) {
-            $resendSMSLoginSection = TemplateEngine::render('ResendSMSLogin.html');
+            $resendSMSLoginSection = TemplateEngine::render(
+                'ResendSMSLogin.html',
+                array(
+                    'formAction'    => $formResendAction,
+                    'userId'        => esc_attr($user->ID),
+                    'clientRef'     => $clientRef,
+                    'authNonce'     => esc_attr($loginNonce),
+                    'interimLogin'  => $interimLogin,
+                    'redirectTo'    => $redirectTo,
+                    'rememberMe'    => esc_attr($rememberme)
+                )
+            );
         }
-
         //Hack for capturing the footer
         ob_start();
         do_action('login_footer');

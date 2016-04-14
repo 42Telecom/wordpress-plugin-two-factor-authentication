@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+## Version 1.0.0-RC9
+_2016-04-14_
+- **[BUG]** Fix resend option on login.
+
 ## Version 1.0.0-RC8
 _2016-04-12_
 - **[BUG]** Add missing jquery dependency on login
