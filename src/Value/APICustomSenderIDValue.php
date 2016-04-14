@@ -41,7 +41,9 @@ class APICustomSenderIDValue extends AbstractValue implements ValueInterface
      */
     public function __construct($value = false)
     {
-        if ($value) {
+        if ($value === '') {
+            $this->value = '';
+        } elseif ($value != '') {
             if (is_numeric($value)) {
                 //numeric
                 if (strlen($value) <=$this->numericLimit) {

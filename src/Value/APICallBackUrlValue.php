@@ -32,7 +32,9 @@ class APICallBackUrlValue extends AbstractValue implements ValueInterface
      */
     public function __construct($value = false)
     {
-        if ($value) {
+        if ($value === '') {
+            $this->value = '';
+        } elseif ($value != '') {
             if (filter_var($value, FILTER_VALIDATE_URL)) {
                 $this->value = $value;
             } else {
