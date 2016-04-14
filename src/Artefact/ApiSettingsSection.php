@@ -56,7 +56,7 @@ class ApiSettingsSection implements SectionInterface
         // Callback url
         add_settings_field(
             'apiCallbackUrl',
-            'Call back url:',
+            'Callback url:',
             array($this, 'apiCallbackUrlCallback'),
             'fortytwo-2fa-admin',
             'ApiSettingsSection'
