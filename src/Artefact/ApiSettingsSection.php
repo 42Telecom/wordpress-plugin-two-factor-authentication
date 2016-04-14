@@ -146,7 +146,7 @@ class ApiSettingsSection implements SectionInterface
 
         printf(
             '<input type="text" id="apiCallbackUrl" name="fortytwo2fa[apiCallbackUrl]" value="%s" />',
-            $callbackurl
+            (string)$callbackurl
         );
     }
 
@@ -161,7 +161,7 @@ class ApiSettingsSection implements SectionInterface
             '<input type="text" id="apiSenderId" name="fortytwo2fa[apiSenderId]" value="%s" />
             <br>
             <small>Only Alphanumeric and numeric are accepted. Max characters for numeric is 15 & alphanumeric is 11.</small>',
-            $senderID
+            (string)$senderID
         );
     }
 }
