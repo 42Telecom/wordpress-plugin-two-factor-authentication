@@ -106,8 +106,9 @@ class Login extends AbstractAuth
      * @param string        $loginNonce A string nonce stored in usermeta.
      * @param string        $redirectTo The URL to which the user would like to be redirected.
      * @param string        $errorMsg Optional. Login error message.
+     * @param string        $clientRef Optional. Client reference to use after error
      */
-    public function loginHtml($user, $loginNonce, $redirectTo, $errorMsg = false)
+    public function loginHtml($user, $loginNonce, $redirectTo, $errorMsg = false, $clientRef = false)
     {
         $options = get_option('fortytwo2fa');
 
@@ -329,7 +330,7 @@ class Login extends AbstractAuth
      * @param object $user Wordpress user object
      * @param string $message Error message
      */
-    public function loginFailed($user, $message = 'ERROR: Invalid verification code.')
+    public function loginFailed($user, $message = 'ERROR: Invalid authentication code.')
     {
         do_action('wp_login_failed', $user->user_login);
 
@@ -343,7 +344,8 @@ class Login extends AbstractAuth
             $user,
             $loginNonce['key'],
             $_REQUEST['redirect_to'],
-            esc_html__($message)
+            esc_html__($message),
+            $_REQUEST['fortytwo-client-ref']
         );
     }
 }
