@@ -2,7 +2,47 @@
     <small>You will receive the Authentication code in less than <span id="countdown">60</span> seconds</small>
 </div>
 <div id="resend-block" style="display:none;" >
-    <small>
-        If you haven\'t received the SMS you can request a new SMS by <a href="#" id="resend-code" onclick="location.reload(); return false;" >clicking here</a>.
-    </small>
+    <form method="POST" action="{{formAction}}" >
+        <p>
+            If you haven't received the SMS you can request a new SMS by clicking on the button below:</a>.
+        </p>
+        <input
+            type="hidden"
+            name="wp-auth-id"
+            id="wp-auth-id"
+            value="{{userId}}"
+        />
+        <input
+            type="hidden"
+            name="fortytwo-client-ref"
+            id="fortytwo-client-ref"
+            value="{{clientRef}}"
+        />
+        <input
+            type="hidden"
+            name="wp-auth-nonce"
+            id="wp-auth-nonce"
+            value="{{authNonce}}"
+        />
+        <input
+            type="hidden"
+            name="interim-login"
+            value="{{interimLogin}}"
+        />
+        <input
+            type="hidden"
+            name="redirect_to"
+            value="{{redirectTo}}"
+        />
+        <input
+            type="hidden"
+            name="rememberme"
+            id="rememberme"
+            value="{{rememberMe}}"
+        />
+        <br />
+        <p class="submit">
+            <input name="re-send" id="re-send" class="button button-primary button-large" value="Re-send" type="submit">
+        </p>
+    </form>
 </div>

@@ -53,7 +53,7 @@ class UserProfile extends AbstractAuth
      */
     public function loadCss($hook)
     {
-        if ($hook != 'profile.php') {
+        if (!in_array($hook, array('user-edit.php', 'profile.php'))) {
             return;
         }
 
@@ -78,7 +78,7 @@ class UserProfile extends AbstractAuth
      */
     public function loadJavascript($hook)
     {
-        if ($hook != 'profile.php') {
+        if (!in_array($hook, array('user-edit.php', 'profile.php'))) {
             return;
         }
 

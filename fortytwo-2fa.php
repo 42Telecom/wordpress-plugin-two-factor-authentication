@@ -4,7 +4,7 @@
 Plugin Name: Fortytwo - Two Factor Authentication plugin
 Plugin URI: https://www.fortytwo.com
 Description: Implement the fortytwo Two Factor Authentication service for login and register on wordpress.
-Version: 1.0.0-RC8
+Version: 1.0.0-RC9
 Author: Sebastien Lemarinel <sebastien.lemarinel@fortytwo.com>
 Author URI: https://www.fortytwo.com
 License: GPL2

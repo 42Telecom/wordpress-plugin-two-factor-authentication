@@ -3,7 +3,7 @@ Contributors: Sebastien Lemarinel
 Tags: 2fa, Two factor authentication, login, register
 Requires at least: 4.4
 Tested up to: 4.4
-Stable tag: 1.0.0-RC8
+Stable tag: 1.0.0-RC9
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -44,6 +44,12 @@ The project is managed with Github. So you can report an issues on our [Reposito
 
 == Changelog ==
 
+= 1.0.0-RC9 =
+- [BUG] Device was always setup as trusted.
+- [BUG] Fix missing phone helper on edit user.
+- [BUG] Fix nullable callbackurl.
+- [BUG] Fix validation code after one fail.
+- [BUG] Fix resend option on login.
 
 = 1.0.0-RC8 =
 - [BUG] Add missing jquery dependency on login
