@@ -3,6 +3,8 @@ CHANGELOG
 
 ## Version 1.0.0-RC9
 _2016-04-14_
+- **[BUG]** Device was always setup as trusted.
+- **[BUG]** Fix missing phone helper on edit user.
 - **[BUG]** Fix nullable callbackurl.
 - **[BUG]** Fix validation code after one fail.
 - **[BUG]** Fix resend option on login.

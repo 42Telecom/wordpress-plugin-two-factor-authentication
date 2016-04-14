@@ -40,7 +40,6 @@ class Login extends AbstractAuth
         if ($user) {
             self::showTwoFactorLogin($user);
         }
-        exit;
     }
 
     /**
@@ -53,7 +52,6 @@ class Login extends AbstractAuth
         if ($user) {
             self::showTwoFactorLogin($user);
         }
-        exit;
     }
 
 
@@ -262,7 +260,9 @@ class Login extends AbstractAuth
                 $Nonce->delete($user->ID);
 
                 // Adding the device as trusted
-                TrustedDevice::add($user->ID);
+                if ($_POST['trusted-device'] == 'trusted') {
+                    TrustedDevice::add($user->ID);
+                }
 
                 // Set rememberme checkbox
                 $rememberme = false;
