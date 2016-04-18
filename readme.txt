@@ -3,7 +3,7 @@ Contributors: Sebastien Lemarinel
 Tags: 2fa, Two factor authentication, login, register
 Requires at least: 4.4
 Tested up to: 4.4
-Stable tag: 1.0.0-RC9
+Stable tag: 1.0.0-RC10
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -43,6 +43,13 @@ The project is managed with Github. So you can report an issues on our [Reposito
 4. Resend the SMS code
 
 == Changelog ==
+
+= 1.0.0-RC10 =
+- [BUG] Fix phone number validation on register.
+- [BUG] Fix various typos.
+- [BUG] Fix code validation on register/login
+- [BUG] Fix bug when we validate code after a fail on register.
+- [BUG] Fix inconsistency on naming of authentication code.
 
 = 1.0.0-RC9 =
 - [BUG] Device was always setup as trusted.

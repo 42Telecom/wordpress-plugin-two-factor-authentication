@@ -22,7 +22,7 @@ class Register extends AbstractAuth
             // Show the phone number field on the register form
             add_action('register_form', array($this, 'addTwoFactorRegister'), 10, 2);
             // Validate phone number
-            add_filter('registration_errors', array($this, 'phoneValidationErrors'), 10, 1);
+            //add_filter('registration_errors', array($this, 'phoneValidationErrors'), 10, 1);
             // Save phone on register
             add_action('user_register', array($this, 'savePhoneNumber'));
             // Add the second step to validate phone number
@@ -116,6 +116,8 @@ class Register extends AbstractAuth
      */
     public function showTwoFactorStep($userLogin, $userEmail, $errors = null)
     {
+        self::phoneValidationErrors($errors);
+
         //Cathcup Wordpress validation first
         if (count($errors->errors) == 0) {
 
@@ -130,16 +132,19 @@ class Register extends AbstractAuth
 
             // if the 2fa code is submited so we verify the code with the API.
             if ($_POST['code']) {
+                if (!empty($_POST['code'])) {
+                    // Create and submit the request to API
+                    $ApiRequest = new TwoFactorAuthentication($options['tokenNumber']);
+                    $response = $ApiRequest->validateCode($_POST['fortytwo-client-ref'], $_POST['code']);
 
-                // Create and submit the request to API
-                $ApiRequest = new TwoFactorAuthentication($options['tokenNumber']);
-                $response = $ApiRequest->validateCode($_POST['fortytwo-client-ref'], $_POST['code']);
-
-                // Manage the response
-                if ($response->getResultInfo()->getStatusCode() != 0) {
-                    $errorMsg = "Wrong validation code.";
+                    // Manage the response
+                    if ($response->getResultInfo()->getStatusCode() != 0) {
+                        $errorMsg = "Wrong authentication code.";
+                    } else {
+                        $validate = true;
+                    }
                 } else {
-                    $validate = true;
+                    $errorMsg = "Authentication code empty.";
                 }
             }
 
@@ -157,6 +162,10 @@ class Register extends AbstractAuth
                         'wpSubmit'          => esc_attr($_POST['wp-submit'])
                     )
                 );
+
+                if (isset($_POST['fortytwo-client-ref'])) {
+                    $clientRef = $_POST['fortytwo-client-ref'];
+                }
 
                 // We send an API call to send the SMS code
                 if (!$errorMsg) {
