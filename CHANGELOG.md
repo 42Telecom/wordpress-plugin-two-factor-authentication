@@ -3,8 +3,9 @@ CHANGELOG
 
 ## Version 1.0.0-RC10
 _2016-04-18_
+- **[BUG]** Fix code validation on register/login
 - **[BUG]** Fix bug when we validate code after a fail on register.
-- **[BUG]** Fix inconsitency on naming of authentication code.
+- **[BUG]** Fix inconsistency on naming of authentication code.
 
 ## Version 1.0.0-RC9
 _2016-04-14_

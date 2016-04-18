@@ -130,16 +130,19 @@ class Register extends AbstractAuth
 
             // if the 2fa code is submited so we verify the code with the API.
             if ($_POST['code']) {
+                if (!empty($_POST['code'])) {
+                    // Create and submit the request to API
+                    $ApiRequest = new TwoFactorAuthentication($options['tokenNumber']);
+                    $response = $ApiRequest->validateCode($_POST['fortytwo-client-ref'], $_POST['code']);
 
-                // Create and submit the request to API
-                $ApiRequest = new TwoFactorAuthentication($options['tokenNumber']);
-                $response = $ApiRequest->validateCode($_POST['fortytwo-client-ref'], $_POST['code']);
-
-                // Manage the response
-                if ($response->getResultInfo()->getStatusCode() != 0) {
-                    $errorMsg = "Wrong authentication code.";
+                    // Manage the response
+                    if ($response->getResultInfo()->getStatusCode() != 0) {
+                        $errorMsg = "Wrong authentication code.";
+                    } else {
+                        $validate = true;
+                    }
                 } else {
-                    $validate = true;
+                    $errorMsg = "Authentication code empty.";
                 }
             }
 

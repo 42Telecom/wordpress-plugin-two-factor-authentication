@@ -250,11 +250,21 @@ class Login extends AbstractAuth
             }
 
             // Check the validity of the code
-            $ApiRequest = new TwoFactorAuthentication($options['tokenNumber']);
-            $response = $ApiRequest->validateCode($_POST['fortytwo-client-ref'], $_POST['code']);
+            if ($_POST['code'] && !empty($_POST['code'])) {
+                $ApiRequest = new TwoFactorAuthentication($options['tokenNumber']);
+                $response = $ApiRequest->validateCode($_POST['fortytwo-client-ref'], $_POST['code']);
+
+                if ($response->getResultInfo()->getStatusCode() != 0) {
+                    $codeIsValid = false;
+                } else {
+                    $codeIsValid = true;
+                }
+            } else {
+                $codeIsValid = false;
+            }
 
             // If the code is not validated = Login failed
-            if ($response->getResultInfo()->getStatusCode() != 0) {
+            if (!$codeIsValid) {
                 self::loginFailed($user);
             } else {
                 $Nonce->delete($user->ID);
