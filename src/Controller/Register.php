@@ -22,7 +22,7 @@ class Register extends AbstractAuth
             // Show the phone number field on the register form
             add_action('register_form', array($this, 'addTwoFactorRegister'), 10, 2);
             // Validate phone number
-            add_filter('registration_errors', array($this, 'phoneValidationErrors'), 10, 1);
+            //add_filter('registration_errors', array($this, 'phoneValidationErrors'), 10, 1);
             // Save phone on register
             add_action('user_register', array($this, 'savePhoneNumber'));
             // Add the second step to validate phone number
@@ -116,6 +116,8 @@ class Register extends AbstractAuth
      */
     public function showTwoFactorStep($userLogin, $userEmail, $errors = null)
     {
+        self::phoneValidationErrors($errors);
+
         //Cathcup Wordpress validation first
         if (count($errors->errors) == 0) {
 
