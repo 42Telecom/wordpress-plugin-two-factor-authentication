@@ -137,7 +137,7 @@ class Register extends AbstractAuth
 
                 // Manage the response
                 if ($response->getResultInfo()->getStatusCode() != 0) {
-                    $errorMsg = "Wrong validation code.";
+                    $errorMsg = "Wrong authentication code.";
                 } else {
                     $validate = true;
                 }
@@ -157,6 +157,10 @@ class Register extends AbstractAuth
                         'wpSubmit'          => esc_attr($_POST['wp-submit'])
                     )
                 );
+
+                if (isset($_POST['fortytwo-client-ref'])) {
+                    $clientRef = $_POST['fortytwo-client-ref'];
+                }
 
                 // We send an API call to send the SMS code
                 if (!$errorMsg) {
