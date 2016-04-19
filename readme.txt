@@ -3,7 +3,7 @@ Contributors: Sebastien Lemarinel
 Tags: 2fa, Two factor authentication, login, register
 Requires at least: 4.4
 Tested up to: 4.4
-Stable tag: 1.0.0-RC11
+Stable tag: 1.0.0
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -53,6 +53,14 @@ The project is managed with Github. So you can report an issues on our [Reposito
 4. Resend the SMS code
 
 == Changelog ==
+
+= 1.0.0 =
+- First stable version.
+
+= 1.0.0-RC11 =
+- [BUG] Fix error message when invalid token used.
+- [BUG] Fix a typo.
+- [IMPROVEMENT] Update readme.txt
 
 = 1.0.0-RC10 =
 - [BUG] Fix phone number validation on register.
