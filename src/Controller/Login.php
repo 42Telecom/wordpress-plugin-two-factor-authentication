@@ -119,7 +119,9 @@ class Login extends AbstractAuth
                 $ApiRequest = new TwoFactorAuthentication(trim($options['tokenNumber']));
                 $response = $ApiRequest->requestCode($clientRef, $phoneValue, $args);
             } catch (\Exception $e) {
-                $errorMsg = $e->getMessage();
+                // FIXME - Need an update of the SDK to show proper errrors
+                //$errorMsg = $e->getMessage();
+                $errorMsg = "Error - Invalid Token.";
             }
         }
 
