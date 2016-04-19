@@ -1,5 +1,8 @@
 CHANGELOG
 =========
+## Version 1.0.0
+_2016-04-19_
+- First stable version.
 
 ## Version 1.0.0-RC11
 _2016-04-19_
