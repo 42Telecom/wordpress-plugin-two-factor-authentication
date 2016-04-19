@@ -7,7 +7,7 @@ Description: Implement the fortytwo Two Factor Authentication service for login 
 Version: 1.0.0-RC11
 Author: Sebastien Lemarinel <sebastien.lemarinel@fortytwo.com>
 Author URI: https://www.fortytwo.com
-License: GPL2
+License: MIT
 */
 
 // Load the composer autoload
