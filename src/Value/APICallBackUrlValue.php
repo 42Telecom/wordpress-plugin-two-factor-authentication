@@ -41,7 +41,7 @@ class APICallBackUrlValue extends AbstractValue implements ValueInterface
                 add_settings_error(
                     'fortytwo2fa',
                     esc_attr($this->fieldId),
-                    'Wrong ' . $this->fieldName . ' format.  the expected format is like http://www.mydomain.com/mycallbackpage',
+                    'Wrong ' . $this->fieldName . ' format. The expected format is like http://www.mydomain.com/mycallbackpage',
                     'error'
                 );
             }

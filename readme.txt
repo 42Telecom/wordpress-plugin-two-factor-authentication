@@ -3,23 +3,22 @@ Contributors: Sebastien Lemarinel
 Tags: 2fa, Two factor authentication, login, register
 Requires at least: 4.4
 Tested up to: 4.4
-Stable tag: 1.0.0-RC10
+Stable tag: 1.0.0-RC11
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
-Two factor Authentication plugin using Fortytwo.com service. This plugin add 2FA
-on Register and Login.
+Secure your WordPress administration panel by adding an extra layer of security to your registration and/or login process using Fortytwo’s Two-Factor Authentication (2FA) plugin.
 
 == Description ==
 
-Two factor Authentication plugin based on [Fortytwo.com](https://www.fortytwo.com/ "Your Preferred Messaging Solutions Partner") service. Add Two factor authentication for Login and register.
+Two-Factor Authentication (2FA) is a powerful way of increasing security via the user logon sequence by simply adding a second factor of authentication to the standard username and password. Fortytwo’s 2FA WordPress plugin controls access to your site by simply sending a one-time code directly to your mobile phone when you register or login.
 
-Features:
+Fortytwo’s WordPress plugin comes with a myriad of features including the option to:
 
-* Activate/Disabled Two Factor Authentication on Login/Register
-* Manage trusted devices
-* Activate Login Two factor authentication depending of the user roles
-* Ability to resend SMS code (or not)
+* activate or disable 2FA for registration and/or login
+* assign 2FA according to a users’ administrative role in WordPress
+* manage trusted devices to facilitate easy access to the WordPress platform
+* resend an SMS code when and as required
 
 == Installation ==
 
@@ -28,6 +27,17 @@ Installing "Fortytwo Two Factor Authentication plugin" can be done either by sea
 1. Download the plugin via WordPress.org
 1. Upload the ZIP file through the 'Plugins > Add New > Upload' screen in your WordPress dashboard
 1. Activate the plugin through the 'Plugins' menu in WordPress
+
+== Configuration ==
+
+Once the plugin is activated you have to configure the plugin before use:
+
+1. In the admin panel go to **Settings > Two Factor Authentication**
+1. Enter the token you have from the [fortytwo control panel](https://controlpanel.fortytwo.com/)
+1. Configure the other options accordingly to your needs
+1. push the save button
+
+**Note:** The Two factor authentication works only for the users who have the 2FA phone number on their profile.
 
 == Frequently Asked Questions ==
 
