@@ -175,7 +175,9 @@ class Register extends AbstractAuth
                         $ApiRequest = new TwoFactorAuthentication(trim($options['tokenNumber']));
                         $response = $ApiRequest->requestCode($clientRef, $phoneNumber, $args);
                     } catch (\Exception $e) {
-                        $errorMsg = $e->getMessage();
+                        // FIXME - Need an update of the SDK to show proper errrors
+                        //$errorMsg = $e->getMessage();
+                        $errorMsg = "Error - Invalid Token.";
                     }
                 }
 
