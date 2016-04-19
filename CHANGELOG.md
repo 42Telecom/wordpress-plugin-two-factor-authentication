@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+## Version 1.0.0-RC11
+_2016-04-19_
+- **[BUG]** Fix error message when invalid token used.
+- **[BUG]** Fix a typo.
+
 ## Version 1.0.0-RC10
 _2016-04-18_
 - **[BUG]** Fix phone number validation on register.
