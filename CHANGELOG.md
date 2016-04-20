@@ -1,5 +1,10 @@
 CHANGELOG
 =========
+
+## Version 1.0.1
+_2016-04-20_
+- **[IMPROVEMENT]** Update the readme.txt
+
 ## Version 1.0.0
 _2016-04-19_
 - First stable version.
