@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+## Version 1.0.3
+_2016-04-20_
+- **[IMPROVEMENT]** Add some tags on the presentation of the plugin.
+
 ## Version 1.0.2
 _2016-04-20_
 - **[IMPROVEMENT]** Fix header description to feet in 150 characters

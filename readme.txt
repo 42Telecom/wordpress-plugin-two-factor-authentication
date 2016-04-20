@@ -1,6 +1,6 @@
 === Fortytwo - Two-Factor Authentication ===
 Contributors: Sebastien Lemarinel
-Tags: 2fa, Two factor authentication, login, register
+Tags: 2fa, Two factor authentication, 2 factor authentication,  2 step authentication, 2-Factor, 2-step verification, login, register
 Requires at least: 4.4
 Tested up to: 4.4
 Stable tag: 1.0.2
