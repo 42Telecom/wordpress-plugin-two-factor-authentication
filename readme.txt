@@ -3,11 +3,11 @@ Contributors: Sebastien Lemarinel
 Tags: 2fa, Two factor authentication, login, register
 Requires at least: 4.4
 Tested up to: 4.4
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
-Secure your WordPress administration panel by adding an extra layer of security to your registration and/or login process using Fortytwo’s Two-Factor Authentication (2FA) plugin.
+Secure your site by adding a layer of security to your registration and/or login process using Fortytwo’s Two-Factor Authentication (2FA) plugin.
 
 == Description ==
 
@@ -53,6 +53,9 @@ The project is managed with Github. So you can report an issues on our [Reposito
 4. Resend the SMS code
 
 == Changelog ==
+
+= 1.0.2 =
+- [IMPROVEMENT] Fix header description to feet in 150 characters
 
 = 1.0.1 =
 - [IMPROVEMENT] Update the readme.txt
