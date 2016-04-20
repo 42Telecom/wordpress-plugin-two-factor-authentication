@@ -1,9 +1,9 @@
-=== Fortytwo - Two Factor Authentication ===
+=== Fortytwo - Two-Factor Authentication ===
 Contributors: Sebastien Lemarinel
 Tags: 2fa, Two factor authentication, login, register
 Requires at least: 4.4
 Tested up to: 4.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -11,7 +11,7 @@ Secure your WordPress administration panel by adding an extra layer of security 
 
 == Description ==
 
-Two-Factor Authentication (2FA) is a powerful way of increasing security via the user logon sequence by simply adding a second factor of authentication to the standard username and password. Fortytwo’s 2FA WordPress plugin controls access to your site by simply sending a one-time code directly to your mobile phone when you register or login.
+Two-Factor Authentication (2FA) is a powerful way of increasing security via the user login sequence by simply adding a second factor of authentication to the standard username and password. Fortytwo’s 2FA WordPress plugin controls access to your site by simply sending a one-time code directly to your mobile phone when you register or login.
 
 Fortytwo’s WordPress plugin comes with a myriad of features including the option to:
 
@@ -53,6 +53,9 @@ The project is managed with Github. So you can report an issues on our [Reposito
 4. Resend the SMS code
 
 == Changelog ==
+
+= 1.0.1 =
+- [IMPROVEMENT] Update the readme.txt
 
 = 1.0.0 =
 - First stable version.
