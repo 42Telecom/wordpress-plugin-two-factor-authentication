@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+## Version 1.0.2
+_2016-04-20_
+- **[IMPROVEMENT]** Fix header description to feet in 150 characters
+
 ## Version 1.0.1
 _2016-04-20_
 - **[IMPROVEMENT]** Update the readme.txt
