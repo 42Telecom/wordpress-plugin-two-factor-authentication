@@ -55,10 +55,10 @@ The project is managed with Github. So you can report an issues on our [Reposito
 == Changelog ==
 
 = 1.0.2 =
-- [IMPROVEMENT] Fix header description to feet in 150 characters
+- [DOCUMENTATION] Fix header description to feet in 150 characters
 
 = 1.0.1 =
-- [IMPROVEMENT] Update the readme.txt
+- [DOCUMENTATION] Update the readme.txt
 
 = 1.0.0 =
 - First stable version.
