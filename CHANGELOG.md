@@ -5,6 +5,7 @@ CHANGELOG
 _2016-04-20_
 - **[DOCUMENTATION]** Add some tags on the presentation of the plugin.
 - **[DOCUMENTATION]** Update the screenshots.
+- **[DOCUMENTATION]** Update readme.txt description.
 
 ## Version 1.0.2
 _2016-04-20_
