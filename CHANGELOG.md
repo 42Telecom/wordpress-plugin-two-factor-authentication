@@ -1,8 +1,12 @@
 CHANGELOG
 =========
 
+## Version 1.0.4
+_2016-04-25_
+- **[IMPROVEMENT]** Support for Wordpress 4.5
+
 ## Version 1.0.3
-_2016-04-20_
+_2016-04-25_
 - **[DOCUMENTATION]** Add some tags on the presentation of the plugin.
 - **[DOCUMENTATION]** Update the screenshots.
 - **[DOCUMENTATION]** Update readme.txt description.
