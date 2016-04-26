@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+## Version 1.0.5
+_2016-04-26_
+- **[IMPROVEMENT]** Update contributor id
+
 ## Version 1.0.4
 _2016-04-25_
 - **[IMPROVEMENT]** Support for Wordpress 4.5
