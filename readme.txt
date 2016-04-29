@@ -3,7 +3,7 @@ Contributors: fortytwotele
 Tags: 2fa, Two factor authentication, 2 factor authentication,  2 step authentication, 2-Factor, 2-step verification, login, register
 Requires at least: 4.4
 Tested up to: 4.5
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -42,13 +42,8 @@ Fortytwo’s 2FA Wordpress plugin supports 2FA for all Smart phones (iPhone, And
 
 = Why use Fortytwo’s WordPress plugin? =
 
-**Security**
-
-Incorporating 2FA in to the user login process, creates a level of protection and security for your WordPress site that complex passwords can no longer guarantee
-
-**Customised functionality**
-
-This is our first version of the plugin and we’re keenly interested in your feedback.
+* **Security** Incorporating 2FA in to the user login process, creates a level of protection and security for your WordPress site that complex passwords can no longer guarantee
+* **Customised functionality** This is our first version of the plugin and we’re keenly interested in your feedback.
 
 If there is additional functionality that you would you like to see, please let us know - we are happy to work on developing features to meet your specific requirements and endeavor to implement this in as short a time-frame as possible.
 
@@ -85,6 +80,10 @@ The project is managed with Github. So you can report an issues on our [Reposito
 4. Resend the SMS code
 
 == Changelog ==
+
+= 1.0.6 =
+- [BUG] Setting panel - Wrong ID for the Case sensitive field.
+- [DOCUMENTATION] Changing "why" items from paragraph to list.
 
 = 1.0.5 =
 - [IMPROVEMENT] Update contributor id

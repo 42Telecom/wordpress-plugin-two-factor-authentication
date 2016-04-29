@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+## Version 1.0.6
+_2016-04-28_
+- **[BUG]** Settings - Update "API Sensitive case" field ID.
+- **[DOCUMENTATION]** Change "why" items to list.
+
 ## Version 1.0.5
 _2016-04-26_
 - **[IMPROVEMENT]** Update contributor id
