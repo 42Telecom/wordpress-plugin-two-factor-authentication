@@ -125,7 +125,7 @@ class ApiSettingsSection implements SectionInterface
     {
         $codeCaseSensitive = new APICodeCaseSensitiveValue();
 
-        $html = '<select id="apiCodeType" name="fortytwo2fa[apiCaseSensitive]" >';
+        $html = '<select id="apiCaseSensitive" name="fortytwo2fa[apiCaseSensitive]" >';
         if ((string)$codeCaseSensitive == 'true') {
             $html.= '<option value="true" selected="selected" >Yes</option>';
             $html.= '<option value="false" >No</option>';
