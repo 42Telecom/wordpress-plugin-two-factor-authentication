@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+## Version 1.0.8
+_2016-05-02_
+- **[DOCUMENTATION]** Fix typo in the readme file.
+
 ## Version 1.0.7
 _2016-05-02_
 - **[BUG]** Update publish script to properly track/add new files and directory and untrack/delete deleted files.
