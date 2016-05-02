@@ -146,20 +146,24 @@ echo -e "sync current Git with SVN trunk"
 # Copy project files on svn directory
 rsync -av --delete --exclude-from '.rsyncignore' . svn/trunk
 
-
 echo -e "\n"
 
 echo -e "Commit trunk"
 
-
-# Commit on trunk
+# Copy the assets in svn
 cp assets/* $LOCALSVN/assets/
-svn add $LOCALSVN/trunk/*
-svn add $LOCALSVN/assets/*
+
+# Add changed files
+cd $LOCALSVN
+svn add `svn status | grep ?`
+cd ..
+
+# Remove/Untrack all deleted files
+svn status | grep '^\!' | sed 's/! *//' | xargs -I% svn rm %
 
 echo -e "\n"
 
-echo -e "Commit version"
+echo -e "Commit to the repository"
 
 # Create a branch
 svn copy $LOCALSVN/trunk $LOCALSVN/tags/${LASTGITTAG}
