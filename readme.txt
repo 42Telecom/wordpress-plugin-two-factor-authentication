@@ -3,7 +3,7 @@ Contributors: fortytwotele
 Tags: 2fa, Two factor authentication, 2 factor authentication,  2 step authentication, 2-Factor, 2-step verification, login, register
 Requires at least: 4.4
 Tested up to: 4.5
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -81,8 +81,9 @@ The project is managed with Github. So you can report an issues on our [Reposito
 
 == Changelog ==
 
-CHANGELOG
-=========
+== Version 1.0.8 ==
+_2016-05-02_
+- **[DOCUMENTATION]** Fix typo in the readme file.
 
 == Version 1.0.7 ==
 _2016-05-02_
