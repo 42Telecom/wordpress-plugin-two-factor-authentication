@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+## Version 1.0.7
+_2016-05-02_
+- **[BUG]** Update publish script to properly track/add new files and directory and untrack/delete deleted files.
+- **[BUG]** Clean the SVN tree.
+
 ## Version 1.0.6
 _2016-04-28_
 - **[BUG]** Settings - Update "API Sensitive case" field ID.
