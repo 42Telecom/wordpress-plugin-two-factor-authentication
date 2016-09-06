@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+## Version 1.1.0-RC1
+_2016-09-06_
+- **[IMPROVEMENT]** Support for Wordpress 4.6.
+- **[IMPROVEMENT]** Update SDK dependencies.
+
 ## Version 1.0.8
 _2016-05-02_
 - **[DOCUMENTATION]** Fix typo in the readme file.
