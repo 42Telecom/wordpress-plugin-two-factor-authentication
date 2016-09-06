@@ -15,7 +15,11 @@ class APICodeTypeValue extends AbstractCollectionValue implements ValueInterface
     /**
      * @inheritDoc
      */
-    protected $collection = array('numeric', 'alpha', 'alphanumeric');
+    protected $collection = array(
+            'numeric' => 'numeric',
+            'alpha' => 'alpha',
+            'alphanumeric' => 'alphanumeric'
+        );
 
     /**
      * @inheritDoc

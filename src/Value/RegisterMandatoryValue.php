@@ -5,40 +5,40 @@ use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Interfaces\ValueInterface;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\AbstractCollectionValue;
 
 /**
- * Class for the Register State value.
+ * Class for the Register 2FA Mandatory value.
  *
  * @license https://opensource.org/licenses/MIT MIT
  */
-class RegisterStateValue extends AbstractCollectionValue implements ValueInterface
+class RegisterMandatoryValue extends AbstractCollectionValue implements ValueInterface
 {
     /**
      * @inheritDoc
      */
-    protected $collection = array('activated' => 'Activated', 'disabled' => 'Disabled');
+    protected $collection = array('yes' => 'Yes', 'no' => 'No');
 
     /**
      * @inheritDoc
      */
-    protected $value = 'activated';
+    protected $value = 'no';
 
     /**
      * @inheritDoc
      */
-    protected $fieldName = '2FA On Register';
+    protected $fieldName = '2FA is mandatory';
 
     /**
      * @inheritDoc
      */
-    protected $fieldId = 'twoFactorOnRegister';
+    protected $fieldId = 'twoFactorOnRegisterMandatory';
 
     /**
-     * True if the field is in the active state or false if is not.
+     * True if 2FA on Register is marked as mandatory state or false if is not.
      *
-     * @return bool Status : true = activated, false = disabled
+     * @return bool Status : true = mandatory, false = optional
      */
-    public function isActive()
+    public function isMandatory()
     {
-        if ($this->value == 'activated') {
+        if ($this->value == 'yes') {
             return true;
         } else {
             return false;

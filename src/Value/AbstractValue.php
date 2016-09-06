@@ -31,6 +31,36 @@ abstract class AbstractValue
      */
     public function __toString()
     {
+        return $this->getValue;
+    }
+
+    /**
+     * Return the value of the object.
+     *
+     * @return mixed value of the object
+     */
+    public function getValue()
+    {
         return $this->value;
+    }
+
+    /**
+     * Return the field name.
+     *
+     * @return string Field name.
+     */
+    public function getFieldName()
+    {
+        return $this->fieldName;
+    }
+
+    /**
+     * Return the field id.
+     *
+     * @return string Field id.
+     */
+    public function getFieldId()
+    {
+        return $this->fieldId;
     }
 }

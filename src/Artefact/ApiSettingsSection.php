@@ -1,6 +1,7 @@
 <?php
 namespace Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Artefact;
 
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Artefact\ArtefactAbstract;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Interfaces\SectionInterface;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICodeLengthValue;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICodeTypeValue;
@@ -13,7 +14,7 @@ use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICallBackUrlValue;
  *
  * @license https://opensource.org/licenses/MIT MIT
  */
-class ApiSettingsSection implements SectionInterface
+class ApiSettingsSection extends ArtefactAbstract implements SectionInterface
 {
     /**
      * @inheritDoc
@@ -84,18 +85,7 @@ class ApiSettingsSection implements SectionInterface
      */
     public function apiCodeLengthCallback()
     {
-        $codeLength = new APICodeLengthValue();
-
-        $html = '<select id="apiCodeLength" name="fortytwo2fa[apiCodeLength]" >';
-        foreach ($codeLength->getOptions() as $value) {
-            if ($codeLength == $value) {
-                $html.= '<option selected="selecte" value="' . $value . '" >' . $value . '</option>';
-            } else {
-                $html.= '<option value="' . $value . '" >' . $value . '</option>';
-            }
-        }
-        $html.= '</select>';
-        echo $html;
+        echo $this->select(new APICodeLengthValue());
     }
 
     /**
@@ -103,19 +93,7 @@ class ApiSettingsSection implements SectionInterface
      */
     public function apiCodeTypeCallback()
     {
-        $codeType = new APICodeTypeValue();
-
-        $html = '<select id="apiCodeType" name="fortytwo2fa[apiCodeType]" >';
-
-        foreach ($codeType->getOptions() as $value) {
-            if ((string)$codeType == $value) {
-                $html.= '<option selected="selecte" value="' . $value . '" >' . $value . '</option>';
-            } else {
-                $html.= '<option value="' . $value . '" >' . $value . '</option>';
-            }
-        }
-        $html.= '</select>';
-        echo $html;
+        echo $this->select(new APICodeTypeValue());
     }
 
     /**
@@ -123,18 +101,7 @@ class ApiSettingsSection implements SectionInterface
      */
     public function apiCaseSensitiveCallback()
     {
-        $codeCaseSensitive = new APICodeCaseSensitiveValue();
-
-        $html = '<select id="apiCaseSensitive" name="fortytwo2fa[apiCaseSensitive]" >';
-        if ((string)$codeCaseSensitive == 'true') {
-            $html.= '<option value="true" selected="selected" >Yes</option>';
-            $html.= '<option value="false" >No</option>';
-        } else {
-            $html.= '<option value="true" >Yes</option>';
-            $html.= '<option value="false" selected="selected" >No</option>';
-        }
-        $html.= '</select>';
-        echo $html;
+        echo $this->select(new APICodeCaseSensitiveValue());
     }
 
     /**

@@ -1,6 +1,7 @@
 <?php
 namespace Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Artefact;
 
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Artefact\ArtefactAbstract;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Interfaces\SectionInterface;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\TokenValue;
 
@@ -9,7 +10,7 @@ use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\TokenValue;
  *
  * @license https://opensource.org/licenses/MIT MIT
  */
-class GeneralSection implements SectionInterface
+class GeneralSection extends ArtefactAbstract implements SectionInterface
 {
     /**
      * @inheritDoc

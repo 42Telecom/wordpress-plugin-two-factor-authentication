@@ -1,15 +1,17 @@
 <?php
 namespace Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Artefact;
 
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Artefact\ArtefactAbstract;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Interfaces\SectionInterface;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\RegisterStateValue;
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\RegisterMandatoryValue;
 
 /**
  * Implement SectionInterface for the Register behavior
  *
  * @license https://opensource.org/licenses/MIT MIT
  */
-class RegisterBehaviorSection implements SectionInterface
+class RegisterBehaviorSection extends ArtefactAbstract implements SectionInterface
 {
     /**
      * @inheritDoc
@@ -33,6 +35,15 @@ class RegisterBehaviorSection implements SectionInterface
             'fortytwo-2fa-admin',
             'RegisterBehaviorSection'
         );
+
+        // 2FA Mandatory on register
+        add_settings_field(
+            'twoFactorOnRegisterMandatory',
+            '2FA on Register is mandatory:',
+            array($this, 'twoFactorOnRegisterMandatoryCallback'),
+            'fortytwo-2fa-admin',
+            'RegisterBehaviorSection'
+        );
     }
 
     /**
@@ -48,17 +59,14 @@ class RegisterBehaviorSection implements SectionInterface
      */
     public function twoFactorOnRegisterCallback()
     {
-        $state = new RegisterStateValue();
+        echo $this->select(new RegisterStateValue());
+    }
 
-        $html = '<select id="twoFactorOnRegister" name="fortytwo2fa[twoFactorOnRegister]" >';
-        if ((string)$state == 'activated') {
-            $html.= '<option selected="selected" value="activated">Activated</option>';
-            $html.= '<option value="disabled">Disabled</option>';
-        } else {
-            $html.= '<option value="activated">Activated</option>';
-            $html.= '<option selected="selected" value="disabled">Disabled</option>';
-        }
-        $html.= '</select>';
-        echo $html;
+    /**
+     * Show select to set 2FA as mandatory or not on Register.
+     */
+    public function twoFactorOnRegisterMandatoryCallback()
+    {
+        echo $this->select(new RegisterMandatoryValue());
     }
 }

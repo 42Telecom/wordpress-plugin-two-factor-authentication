@@ -14,7 +14,7 @@ class LoginResendStateValue extends AbstractCollectionValue implements ValueInte
     /**
      * @inheritDoc
      */
-    protected $collection = array('yes', 'no');
+    protected $collection = array('yes' => 'Yes', 'no' => 'No');
 
     /**
      * @inheritDoc
