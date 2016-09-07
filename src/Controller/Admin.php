@@ -2,20 +2,6 @@
 namespace Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Controller;
 
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Factory\RegisterSection;
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\TokenValue;
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\TrustedTTLValue;
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\LoginUsersValue;
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\LoginStateValue;
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICodeTypeValue;
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\TrustedStateValue;
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICodeLengthValue;
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\RegisterStateValue;
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICallBackUrlValue;
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\LoginResendStateValue;
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICustomSenderIDValue;
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICodeCaseSensitiveValue;
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\LoginMandatoryValue;
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\RegisterMandatoryValue;
 
 /**
  * Manage Admin settings for the plugin
@@ -100,20 +86,20 @@ class Admin
     public function fieldMapping()
     {
         $fieldMap = array(
-            'TokenValue',
-            'LoginStateValue',
-            'LoginMandatoryValue',
-            'LoginResendStateValue',
-            'LoginUsersValue',
-            'RegisterStateValue',
-            'RegisterMandatoryValue',
-            'TrustedStateValue',
-            'TrustedTTLValue',
-            'APICodeLengthValue',
-            'APICodeTypeValue',
-            'APICodeCaseSensitiveValue',
-            'APICallBackUrlValue',
-            'APICustomSenderIDValue'
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\TokenValue',
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\LoginStateValue',
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\LoginMandatoryValue',
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\LoginResendStateValue',
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\LoginUsersValue',
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\RegisterStateValue',
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\RegisterMandatoryValue',
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\TrustedStateValue',
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\TrustedTTLValue',
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICodeLengthValue',
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICodeTypeValue',
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICodeCaseSensitiveValue',
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICallBackUrlValue',
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICustomSenderIDValue'
         );
 
         return $fieldMap;
@@ -121,15 +107,17 @@ class Admin
 
     public function sanitize($input)
     {
-        $new_input = array();
+        $newInput = array();
 
-        foreach ($fieldMap as $field) {
-            if (isset($input[$field::getFieldId()])) {
-                $value = new $field($input[$field::getFieldId()]);
-                $new_input[$field::getFieldId()] = $value;
+        foreach ($this->fieldMapping() as $field) {
+            $obj = new $field();
+            $fieldId = (string)$obj->getFieldId();
+
+            if (isset($input[$fieldId])) {
+                $valueObj = new $field($input[$fieldId]);
+                $newInput[$fieldId] = $valueObj->getValue();
             }
         }
-
-        return $new_input;
+        return $newInput;
     }
 }

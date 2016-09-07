@@ -8,7 +8,8 @@ jQuery(document).ready(function($) {
     $("#mobile-number").intlTelInput({
         preferredCountries: [],
         defaultCountry: "auto",
-        nationalMode: false,
+        nationalMode: true,
+        separateDialCode: true,
         geoIpLookup: function(callback) {
             $.ajax({
                 url: wpjs.ajax_url,

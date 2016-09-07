@@ -22,7 +22,7 @@ abstract class AbstractCollectionValue extends AbstractValue implements ValueInt
     public function __construct($value = false)
     {
         if ($value) {
-            if (in_array($value, $this->collection)) {
+            if (in_array($value, array_flip($this->collection))) {
                 $this->value = $value;
             } else {
                 add_settings_error(

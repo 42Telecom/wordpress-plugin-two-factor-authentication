@@ -41,7 +41,7 @@ class LoginBehaviorSection extends ArtefactAbstract implements SectionInterface
         add_settings_field(
             'twoFactorOnLoginMandatory',
             '2FA on Login is mandatory:',
-            array($this, 'twoFactorOnLoginCallback'),
+            array($this, 'twoFactorOnLoginMandatoryCallback'),
             'fortytwo-2fa-admin',
             'LoginBehaviorSection'
         );
@@ -108,7 +108,7 @@ class LoginBehaviorSection extends ArtefactAbstract implements SectionInterface
     public function twoFactorByRoleCallback()
     {
         $rolesObj = new LoginUsersValue();
-        $roles = $rolesObj->getValues();
+        $roles = $rolesObj->getValue();
         $html ='<select  id="twoFactorByRole" name="fortytwo2fa[twoFactorByRole][]"  size="5" multiple>';
         $select = '';
 

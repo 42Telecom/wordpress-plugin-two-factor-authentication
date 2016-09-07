@@ -31,7 +31,7 @@ abstract class AbstractValue
      */
     public function __toString()
     {
-        return $this->getValue;
+        return $this->value;
     }
 
     /**
