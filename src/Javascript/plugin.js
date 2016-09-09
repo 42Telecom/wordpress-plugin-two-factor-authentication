@@ -60,4 +60,8 @@ jQuery(document).ready(function($) {
         $("#error-msg-mobile").addClass("hide");
         $("#valid-msg-mobile").addClass("hide");
     });
+
+    $("#registerform, #your-profile, #resendSMS").submit(function() {
+        $("#hidden-phone").val($("#mobile-number").intlTelInput("getNumber"));
+    });
 });
