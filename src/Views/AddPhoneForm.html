@@ -1,0 +1,65 @@
+<form
+    name="validate_2fa_form"
+    id="loginformaddphone"
+    action="{{formAction}}"
+    method="post"
+    autocomplete="off"
+>
+        <input
+            type="hidden"
+            name="wp-auth-id"
+            id="wp-auth-id"
+            value="{{userId}}"
+        />
+        <input
+            type="hidden"
+            name="fortytwo-client-ref"
+            id="fortytwo-client-ref"
+            value="{{clientRef}}"
+        />
+        <input
+            type="hidden"
+            name="wp-auth-nonce"
+            id="wp-auth-nonce"
+            value="{{authNonce}}"
+        />
+        <input
+            type="hidden"
+            name="interim-login"
+            value="{{interimLogin}}"
+        />
+        <input
+            type="hidden"
+            name="redirect_to"
+            value="{{redirectTo}}"
+        />
+        <input
+            type="hidden"
+            name="rememberme"
+            id="rememberme"
+            value="{{rememberMe}}"
+        />
+        <h3>2 Factor Authentication</h3>
+        <br>
+        <p>The Two-Factor Authentication require a valid phone number.</p>
+        <br>
+        <p>
+            <label for="user_pass">Mobile Authentication Code<br>
+                <input type="text" id="mobile-number" value="" class="regular-text" />
+                <input type="hidden" name="2faPhone" id="hidden-phone" />
+                <input type="hidden" name="2faPhoneValidation" id="mobile-validation" value='' />
+            </label>
+        </p>
+        <p class="submit">
+            <input name="wp-submit" id="wp-submit" class="button button-primary button-large" value="Confirm" type="submit">
+        </p>
+</form>
+
+<p id="backtoblog">
+    <a href="{{homeUrl}}" title="Are you lost?">{{HomeUrlLabel}}</a>
+</p>
+{{wpFooter}}
+<div class="clear"></div>
+
+</body>
+</html>

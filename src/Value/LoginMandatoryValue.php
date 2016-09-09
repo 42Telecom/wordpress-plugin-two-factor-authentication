@@ -19,7 +19,7 @@ class LoginMandatoryValue extends AbstractCollectionValue implements ValueInterf
     /**
      * @inheritDoc
      */
-    protected $value = 'no';
+    protected $value = 'yes';
 
     /**
      * @inheritDoc

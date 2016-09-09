@@ -19,7 +19,7 @@ class RegisterMandatoryValue extends AbstractCollectionValue implements ValueInt
     /**
      * @inheritDoc
      */
-    protected $value = 'no';
+    protected $value = 'yes';
 
     /**
      * @inheritDoc
