@@ -17,9 +17,6 @@ class GeneralSection extends ArtefactAbstract implements SectionInterface
      */
     public function add()
     {
-
-
-
         // Add the General section
         add_settings_section(
             'GeneralSection',
@@ -36,9 +33,6 @@ class GeneralSection extends ArtefactAbstract implements SectionInterface
             'fortytwo-2fa-admin',
             'GeneralSection'
         );
-
-
-
         return $this;
     }
 
@@ -58,7 +52,7 @@ class GeneralSection extends ArtefactAbstract implements SectionInterface
         $token = new TokenValue();
 
         printf(
-            '<input type="text" id="tokenNumber" name="fortytwo2fa[tokenNumber]" value="%s" />',
+            '<input type="text" id="tokenNumber" name="fortytwo2fa[tokenNumber]" value="%s" style="width: 300px;" />',
             isset($token) ? esc_attr($token) : ''
         );
     }
