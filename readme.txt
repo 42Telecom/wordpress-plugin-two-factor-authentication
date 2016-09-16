@@ -33,7 +33,7 @@ Fortytwo’s WordPress plugin comes with a myriad of features including the opti
 
 * **activate or disable 2FA for registration and/or login** allowing the user to login using a username, password and 2FA or just a username and password
 * **activate 2FA for login according to the user’s role in WordPress**, for example, you can disable 2FA for certain users such as subscribers while maintaining 2FA for users with critical roles
-* **Activate 2FA as optional or mandatory option for users.
+* **Activate 2FA as optional or mandatory option for users**, so you can give to your user the option to activate 2FA or force the option by default.
 * **assign ‘trusted’ devices to specific users** allowing the user - after their initial 2FA login -  to validate their devices as ‘trusted’ for a specific time period, assigned by them in the settings. This option ensures that users aren’t required to enter an authentication code repeatedly with an assigned trusted device, after the initial 2FA login
 * **resend the authentication code after registration** if the SMS was not received - this allows the user to request the authentication code after 60 seconds and/or change his phone number in the event that an incorrect phone number was submitted
 * **resend the authentication code after login** if the SMS was not received - this allows the user to request the authentication code again after 60 seconds - this re-send option can also be disabled in the settings
