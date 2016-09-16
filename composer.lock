@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "19474547e84cad849c535e9a58883399",
-    "content-hash": "ad3dc1bf40ee44a571fea99707366c00",
+    "hash": "a9d300bdc6bc8b150bc97a8913b2df6c",
+    "content-hash": "95119ad024381b23d939c2b6f43eebd7",
     "packages": [
         {
             "name": "composer/installers",
@@ -303,16 +303,16 @@
         },
         {
             "name": "fortytwo/php-sdk-two-factor-authentication",
-            "version": "1.3.1",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/42Telecom/php-sdk-two-factor-authentication.git",
-                "reference": "e8b358f132ff97eab2dabfd26550befb85e90358"
+                "reference": "8b2242d9bfe2ef4421e3f4aa7a76edf1ec16601d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/42Telecom/php-sdk-two-factor-authentication/zipball/e8b358f132ff97eab2dabfd26550befb85e90358",
-                "reference": "e8b358f132ff97eab2dabfd26550befb85e90358",
+                "url": "https://api.github.com/repos/42Telecom/php-sdk-two-factor-authentication/zipball/8b2242d9bfe2ef4421e3f4aa7a76edf1ec16601d",
+                "reference": "8b2242d9bfe2ef4421e3f4aa7a76edf1ec16601d",
                 "shasum": ""
             },
             "require": {
@@ -346,7 +346,7 @@
                 "Two Factor Authentication",
                 "fortytwo"
             ],
-            "time": "2016-09-09 15:24:03"
+            "time": "2016-09-15 12:49:22"
         },
         {
             "name": "guzzlehttp/guzzle",

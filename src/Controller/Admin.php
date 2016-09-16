@@ -99,7 +99,8 @@ class Admin
             '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICodeTypeValue',
             '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICodeCaseSensitiveValue',
             '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICallBackUrlValue',
-            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICustomSenderIDValue'
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICustomSenderIDValue',
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APITemplateMessageValue'
         );
 
         return $fieldMap;

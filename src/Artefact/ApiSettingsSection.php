@@ -6,6 +6,7 @@ use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Interfaces\SectionInterfac
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICodeLengthValue;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICodeTypeValue;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICustomSenderIDValue;
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APITemplateMessageValue;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICodeCaseSensitiveValue;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICallBackUrlValue;
 
@@ -70,6 +71,15 @@ class ApiSettingsSection extends ArtefactAbstract implements SectionInterface
             'fortytwo-2fa-admin',
             'ApiSettingsSection'
         );
+
+        add_settings_field(
+            'apiTemplateMessage',
+            'Message Template:',
+            array($this, 'apiTemplateMessageCallback'),
+            'fortytwo-2fa-admin',
+            'ApiSettingsSection'
+        );
+
     }
 
     /**
@@ -129,6 +139,21 @@ class ApiSettingsSection extends ArtefactAbstract implements SectionInterface
             <br>
             <small>Only Alphanumeric and numeric are accepted. Max characters for numeric is 15 & alphanumeric is 11.</small>',
             (string)$senderID
+        );
+    }
+
+    /**
+     * API Message Template.
+     */
+    public function apiTemplateMessageCallback()
+    {
+        $messageTemplate= new APITemplateMessageValue();
+
+        printf(
+            '<input type="text" id="apiTemplateMessage" name="fortytwo2fa[apiTemplateMessage]" value="%s" />
+            <br>
+            <small>The text that should appear in the message the client receives.It is mandatory that ‘{#TFA_CODE}’ is included in this string.</small>',
+            (string)$messageTemplate
         );
     }
 }
