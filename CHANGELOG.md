@@ -1,10 +1,13 @@
 CHANGELOG
 =========
 
-## Version 1.1.0-RC1
-_2016-09-06_
-- **[IMPROVEMENT]** Support for Wordpress 4.6.
+## Version 1.1.0
+_2016-09-16_
+- **[IMPROVEMENT]** Support for Wordpress 4.6.X.
 - **[IMPROVEMENT]** Update SDK dependencies.
+- **[IMPROVEMENT]** Phone field rendering updated.
+- **[IMPROVEMENT]** New API Paremeter : Message template to personalize the message sent with the 2FA Code.
+- **[IMPROVEMENT]** New Mandatory option allowing to have 2FA option as optional or mandatory on login and/or on register.
 
 ## Version 1.0.8
 _2016-05-02_
