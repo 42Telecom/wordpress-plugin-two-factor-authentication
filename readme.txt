@@ -3,7 +3,7 @@ Contributors: fortytwotele
 Tags: 2fa, Two factor authentication, 2 factor authentication,  2 step authentication, 2-Factor, 2-step verification, login, register
 Requires at least: 4.4
 Tested up to: 4.6
-Stable tag: 1.0.8
+Stable tag: 1.1.0
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -83,7 +83,7 @@ The project is managed with Github. So you can report an issues on our [Reposito
 == Changelog ==
 
 == Version 1.1.0 ==
-_2016-09-16_
+_2016-10-04_
 * **[IMPROVEMENT]** Support for Wordpress 4.6.X.
 * **[IMPROVEMENT]** Update SDK dependencies.
 * **[IMPROVEMENT]** Phone field rendering updated.

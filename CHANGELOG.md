@@ -2,7 +2,7 @@ CHANGELOG
 =========
 
 ## Version 1.1.0
-_2016-09-16_
+_2016-10-04_
 - **[IMPROVEMENT]** Support for Wordpress 4.6.X.
 - **[IMPROVEMENT]** Update SDK dependencies.
 - **[IMPROVEMENT]** Phone field rendering updated.
