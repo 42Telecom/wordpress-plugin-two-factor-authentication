@@ -8,7 +8,9 @@ jQuery(document).ready(function($) {
     $("#mobile-number").intlTelInput({
         preferredCountries: [],
         defaultCountry: "auto",
-        nationalMode: false,
+        nationalMode: true,
+        separateDialCode: true,
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/9.0.9/js/utils.js",
         geoIpLookup: function(callback) {
             $.ajax({
                 url: wpjs.ajax_url,
@@ -28,35 +30,26 @@ jQuery(document).ready(function($) {
         }
     });
 
-    // on blur: validate
-    $("#mobile-number").blur(function() {
-        if ($.trim($("#mobile-number").val())) {
-            if ($("#mobile-number").intlTelInput("isValidNumber")) {
-                $("#valid-msg-mobile").removeClass("hide");
-                $('input[name="mobile-number-error"]').remove();
-                $("#mobile-number").removeClass('wpcf7-not-valid');
-                $("span.wpcf7-not-valid-tip",".wpcf7-form-control-wrap.mobile_number").remove();
-            } else {
-                $("#mobile-number").addClass("error");
-                $("#error-msg-mobile").removeClass("hide");
-                $("#valid-msg-mobile").addClass("hide");
-                if ($("#mobile-number-error").length === 0) {
-                    $('<input id="mobile-number-error" type="hidden" name="mobile-number-error" value="1">').insertAfter("#mobile-number");
-                }
-            }
+    $("#registerform, #your-profile, #resendSMS, #loginformaddphone").submit(function() {
+        if (!$("#mobile-number").intlTelInput("isValidNumber")) {
+
+            $("#mobile-validation").val(
+                $("#mobile-number").intlTelInput("getValidationError")
+            );
+        }
+
+        if ($("#mobile-number").val() !== '' ){
+            $("#hidden-phone").val(
+                $("#mobile-number").intlTelInput("getNumber")
+            );
         }
     });
 
-    // on keydown: reset
-    $("#mobile-number").keydown(function() {
-        $("#mobile-number").removeClass("error");
-        $("#error-msg-mobile").addClass("hide");
-        $("#valid-msg-mobile").addClass("hide");
-    });
-
-    $(".flag-dropdown").click(function() {
-        $("#mobile-number").removeClass("error");
-        $("#error-msg-mobile").addClass("hide");
-        $("#valid-msg-mobile").addClass("hide");
+    $('#2fa-activation').on('change',function(){
+        if($('#2fa-activation').prop('checked')) {
+            $('#2faSection').css('display', 'block');
+        } else {
+            $('#2faSection').css('display', 'none');
+        }
     });
 });

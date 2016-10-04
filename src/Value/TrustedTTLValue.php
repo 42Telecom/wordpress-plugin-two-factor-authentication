@@ -14,7 +14,14 @@ class TrustedTTLValue extends AbstractCollectionValue implements ValueInterface
     /**
      * @inheritDoc
      */
-    protected $collection = array('10', '20', '30', '40', '50', '60');
+    protected $collection = array(
+        '10' => '10 Days',
+        '20' => '20 Days',
+        '30' => '30 Days',
+        '40' => '40 Days',
+        '50' => '50 Days',
+        '60' => '60 Days'
+    );
 
     /**
      * @inheritDoc

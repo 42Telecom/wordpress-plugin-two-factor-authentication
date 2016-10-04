@@ -40,10 +40,14 @@ class UserProfile extends AbstractAuth
     {
         $phoneValue = get_user_option('2faPhone', $user->ID);
 
+        if ($phoneValue != '') {
+            $phoneValue = '+' . $phoneValue;
+        }
+
         echo TemplateEngine::render(
             'UserEditForm.html',
             array(
-                'phoneValue'    => '+' . $phoneValue,
+                'phoneValue'    => $phoneValue,
             )
         );
     }

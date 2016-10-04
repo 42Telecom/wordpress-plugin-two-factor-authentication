@@ -14,7 +14,7 @@ class LoginStateValue extends AbstractCollectionValue implements ValueInterface
     /**
      * @inheritDoc
      */
-    protected $collection = array('activated', 'disabled');
+    protected $collection = array('activated' => 'Activated', 'disabled' => 'Disabled');
 
     /**
      * @inheritDoc

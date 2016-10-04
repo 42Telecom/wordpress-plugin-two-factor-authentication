@@ -1,6 +1,7 @@
 <?php
 namespace Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Artefact;
 
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Artefact\ArtefactAbstract;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Interfaces\SectionInterface;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\TrustedTTLValue;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\TrustedStateValue;
@@ -10,7 +11,7 @@ use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\TrustedStateValue;
  *
  * @license https://opensource.org/licenses/MIT MIT
  */
-class TrustedDeviceSection implements SectionInterface
+class TrustedDeviceSection extends ArtefactAbstract implements SectionInterface
 {
     /**
      * @inheritDoc
@@ -59,19 +60,7 @@ class TrustedDeviceSection implements SectionInterface
      */
     public function trustedDeviceOptionCallback()
     {
-        $trustedState = new TrustedStateValue();
-
-        $html = '<select id="trustedDeviceOption" name="fortytwo2fa[trustedDeviceOption]" >';
-
-        if ((string)$trustedState == 'activated') {
-            $html.= '<option selected="selected" value="activated">Activated</option>';
-            $html.= '<option value="disabled">Disabled</option>';
-        } else {
-            $html.= '<option value="activated">Activated</option>';
-            $html.= '<option selected="selected" value="disabled">Disabled</option>';
-        }
-        $html.= '</select>';
-        echo $html;
+        echo $this->select(new TrustedStateValue());
     }
 
     /**
@@ -79,17 +68,6 @@ class TrustedDeviceSection implements SectionInterface
      */
     public function trustedDeviceTimeOutCallback()
     {
-        $trustedTTL = new TrustedTTLValue;
-
-        $html = '<select id="trustedDeviceTimeOut" name="fortytwo2fa[trustedDeviceTimeOut]" >';
-        foreach ($trustedTTL->getOptions() as $value) {
-            if ((string)$trustedTTL == $value) {
-                $html.= '<option selected="selecte" value="' . $value . '" >' . $value . ' days</option>';
-            } else {
-                $html.= '<option value="' . $value . '" >' . $value . ' days</option>';
-            }
-        }
-        $html.= '</select>';
-        echo $html;
+        echo $this->select(new TrustedTTLValue());
     }
 }

@@ -2,18 +2,6 @@
 namespace Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Controller;
 
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Factory\RegisterSection;
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\TokenValue;
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\TrustedTTLValue;
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\LoginUsersValue;
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\LoginStateValue;
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICodeTypeValue;
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\TrustedStateValue;
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICodeLengthValue;
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\RegisterStateValue;
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICallBackUrlValue;
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\LoginResendStateValue;
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICustomSenderIDValue;
-use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICodeCaseSensitiveValue;
 
 /**
  * Manage Admin settings for the plugin
@@ -90,68 +78,47 @@ class Admin
         RegisterSection::get("ApiSettingsSection")->add();
     }
 
+    /**
+     * Map the list of fields used in the admin.
+     *
+     * @return array Name of value oject used as fields.
+     */
+    public function fieldMapping()
+    {
+        $fieldMap = array(
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\TokenValue',
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\LoginStateValue',
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\LoginMandatoryValue',
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\LoginResendStateValue',
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\LoginUsersValue',
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\RegisterStateValue',
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\RegisterMandatoryValue',
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\TrustedStateValue',
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\TrustedTTLValue',
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICodeLengthValue',
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICodeTypeValue',
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICodeCaseSensitiveValue',
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICallBackUrlValue',
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APICustomSenderIDValue',
+            '\Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\APITemplateMessageValue'
+        );
+
+        return $fieldMap;
+    }
+
     public function sanitize($input)
     {
-        $new_input = array();
-        if (isset($input['tokenNumber'])) {
-            $token = new TokenValue($input['tokenNumber']);
-            $new_input['tokenNumber'] = (string)$token;
-        }
+        $newInput = array();
 
-        if (isset($input['twoFactorOnLogin'])) {
-            $loginState = new LoginStateValue($input['twoFactorOnLogin']);
-            $new_input['twoFactorOnLogin'] = (string)$loginState;
-        }
+        foreach ($this->fieldMapping() as $field) {
+            $obj = new $field();
+            $fieldId = (string)$obj->getFieldId();
 
-        if (isset($input['smsResend'])) {
-            $loginSMSResend = new LoginResendStateValue($input['smsResend']);
-            $new_input['smsResend'] = (string)$loginSMSResend;
+            if (isset($input[$fieldId])) {
+                $valueObj = new $field($input[$fieldId]);
+                $newInput[$fieldId] = $valueObj->getValue();
+            }
         }
-
-        if (isset($input['twoFactorByRole'])) {
-            $loginByRole = new LoginUsersValue($input['twoFactorByRole']);
-            $new_input['twoFactorByRole'] = $loginByRole->getValues();
-        }
-
-        if (isset($input['twoFactorOnRegister'])) {
-            $registerState = new RegisterStateValue($input['twoFactorOnRegister']);
-            $new_input['twoFactorOnRegister'] = (string)$registerState;
-        }
-
-        if (isset($input['trustedDeviceOption'])) {
-            $trustedState = new TrustedStateValue($input['trustedDeviceOption']);
-            $new_input['trustedDeviceOption'] = (string)$trustedState;
-        }
-
-        if (isset($input['trustedDeviceTimeOut'])) {
-            $trustedTTL = new TrustedTTLValue($input['trustedDeviceTimeOut']);
-            $new_input['trustedDeviceTimeOut'] = (string)$trustedTTL;
-        }
-
-        if (isset($input['apiCodeLength'])) {
-            $codeLength = new APICodeLengthValue($input['apiCodeLength']);
-            $new_input['apiCodeLength'] = (string)$codeLength;
-        }
-
-        if (isset($input['apiCodeType'])) {
-            $codeType = new APICodeTypeValue($input['apiCodeType']);
-            $new_input['apiCodeType'] = (string)$codeType;
-        }
-
-        if (isset($input['apiCaseSensitive'])) {
-            $codeCaseSensitive = new APICodeCaseSensitiveValue($input['apiCaseSensitive']);
-            $new_input['apiCaseSensitive'] = (string)$codeCaseSensitive;
-        }
-
-        if (isset($input['apiCallbackUrl'])) {
-            $apiCallbackUrl = new APICallBackUrlValue($input['apiCallbackUrl']);
-            $new_input['apiCallbackUrl'] = (string)$apiCallbackUrl;
-        }
-
-        if (isset($input['apiSenderId'])) {
-            $apiSenderId = new APICustomSenderIDValue($input['apiSenderId']);
-            $new_input['apiSenderId'] = (string)$apiSenderId;
-        }
-        return $new_input;
+        return $newInput;
     }
 }

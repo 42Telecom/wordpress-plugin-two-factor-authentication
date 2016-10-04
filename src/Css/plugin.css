@@ -1,1 +1,15 @@
 .iti-flag {background-image: url("../Img/flags.png");}
+
+#mobile-number::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #CCC;
+}
+#mobile-number::-moz-placeholder { /* Firefox 19+ */
+  color: #CCC;
+}
+#mobile-number:-ms-input-placeholder { /* IE 10+ */
+  color: #CCC;
+}
+
+#registerform, #your-profile, #resendSMS, #loginformaddphone {
+    overflow: visible;
+}

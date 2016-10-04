@@ -1,6 +1,7 @@
 <?php
 namespace Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Artefact;
 
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Artefact\ArtefactAbstract;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Interfaces\SectionInterface;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\TokenValue;
 
@@ -9,16 +10,13 @@ use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\TokenValue;
  *
  * @license https://opensource.org/licenses/MIT MIT
  */
-class GeneralSection implements SectionInterface
+class GeneralSection extends ArtefactAbstract implements SectionInterface
 {
     /**
      * @inheritDoc
      */
     public function add()
     {
-
-
-
         // Add the General section
         add_settings_section(
             'GeneralSection',
@@ -35,9 +33,6 @@ class GeneralSection implements SectionInterface
             'fortytwo-2fa-admin',
             'GeneralSection'
         );
-
-
-
         return $this;
     }
 
@@ -57,7 +52,7 @@ class GeneralSection implements SectionInterface
         $token = new TokenValue();
 
         printf(
-            '<input type="text" id="tokenNumber" name="fortytwo2fa[tokenNumber]" value="%s" />',
+            '<input type="text" id="tokenNumber" name="fortytwo2fa[tokenNumber]" value="%s" style="width: 300px;" />',
             isset($token) ? esc_attr($token) : ''
         );
     }

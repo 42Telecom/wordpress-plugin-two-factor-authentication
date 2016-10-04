@@ -27,23 +27,13 @@ class LoginUsersValue extends AbstractValue implements ValueInterface
     public function __construct($value = false)
     {
         if ($value) {
-            $this->roles = $value;
+            $this->value = $value;
         } else {
             $options = get_option('fortytwo2fa');
 
             if (isset($options[$this->fieldId])) {
-                $this->roles = $options[$this->fieldId];
+                $this->value = $options[$this->fieldId];
             }
         }
-    }
-
-    /**
-     * Get the roles saved.
-     *
-     * @return array list of selected roles.
-     */
-    public function getValues()
-    {
-        return $this->roles;
     }
 }
