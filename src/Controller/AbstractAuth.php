@@ -36,6 +36,9 @@ class AbstractAuth
         if (isset($options['apiSenderId']) && ($options['apiSenderId'] != '')) {
             $args['senderId'] = $options['apiSenderId'];
         }
+        if (isset($options['apiTemplateMessage']) && ($options['apiTemplateMessage'] != '')) {
+            $args['messageTemplate'] = $options['apiTemplateMessage'];
+        }
         return $args;
     }
 

@@ -45,7 +45,7 @@ class RegisterSection
                 break;
 
             case 'TrustedDeviceSection':
-                $instance = new TrustedDeviceSection;
+                $instance = new TrustedDeviceSection();
                 break;
 
             default:

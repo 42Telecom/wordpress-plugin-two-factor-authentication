@@ -14,7 +14,7 @@ class TrustedStateValue extends AbstractCollectionValue implements ValueInterfac
     /**
      * @inheritDoc
      */
-    protected $collection = array('activated', 'disabled');
+    protected $collection = array('activated' => 'Activated', 'disabled' => 'Disabled');
 
     /**
      * @inheritDoc

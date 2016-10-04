@@ -5,33 +5,47 @@ use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Interfaces\ValueInterface;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\AbstractValue;
 
 /**
- * Abstract class for the Collection values.
+ * Class for the API Callback url Value.
  *
  * @license https://opensource.org/licenses/MIT MIT
  */
-abstract class AbstractCollectionValue extends AbstractValue implements ValueInterface
+class APITemplateMessageValue extends AbstractValue implements ValueInterface
 {
+
     /**
-     * @var array
+     * @var string
      */
-    protected $collection = array();
+    protected $value = '';
+
+    /**
+     * @inheritDoc
+     */
+    protected $fieldName = 'API Template Message';
+
+    /**
+     * @inheritDoc
+     */
+    protected $fieldId = 'apiTemplateMessage';
 
     /**
      * @inheritDoc
      */
     public function __construct($value = false)
     {
-        if ($value) {
-            if (in_array($value, array_flip($this->collection))) {
+        if ($value === '') {
+            $this->value = null;
+        } elseif ($value != '') {
+            if (strpos($value, '{#TFA_CODE}')) {
                 $this->value = $value;
             } else {
                 add_settings_error(
                     'fortytwo2fa',
                     esc_attr($this->fieldId),
-                    'Wrong ' . $this->fieldName . ' option: ' . $value,
+                    'The placeholder {#TFA_CODE} is mandatory in ' . $this->fieldName . '.',
                     'error'
                 );
             }
+
         } else {
             $options = get_option('fortytwo2fa');
 
@@ -39,13 +53,5 @@ abstract class AbstractCollectionValue extends AbstractValue implements ValueInt
                 $this->value = $options[$this->fieldId];
             }
         }
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getOptions()
-    {
-        return $this->collection;
     }
 }

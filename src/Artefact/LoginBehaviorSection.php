@@ -1,9 +1,11 @@
 <?php
 namespace Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Artefact;
 
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Artefact\ArtefactAbstract;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Interfaces\SectionInterface;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\LoginUsersValue;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\LoginStateValue;
+use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\LoginMandatoryValue;
 use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\LoginResendStateValue;
 
 /**
@@ -11,7 +13,7 @@ use Fortytwo\Wordpress\Plugin\TwoFactorAuthentication\Value\LoginResendStateValu
  *
  * @license https://opensource.org/licenses/MIT MIT
  */
-class LoginBehaviorSection implements SectionInterface
+class LoginBehaviorSection extends ArtefactAbstract implements SectionInterface
 {
     /**
      * @inheritDoc
@@ -32,6 +34,14 @@ class LoginBehaviorSection implements SectionInterface
             'twoFactorOnLogin',
             'Activate/disable 2FA on Login:',
             array($this, 'twoFactorOnLoginCallback'),
+            'fortytwo-2fa-admin',
+            'LoginBehaviorSection'
+        );
+
+        add_settings_field(
+            'twoFactorOnLoginMandatory',
+            '2FA on Login is mandatory:',
+            array($this, 'twoFactorOnLoginMandatoryCallback'),
             'fortytwo-2fa-admin',
             'LoginBehaviorSection'
         );
@@ -73,18 +83,15 @@ class LoginBehaviorSection implements SectionInterface
      */
     public function twoFactorOnLoginCallback()
     {
-        $loginState = new LoginStateValue();
+        echo $this->select(new LoginStateValue());
+    }
 
-        $html = '<select id="twoFactorOnLogin" name="fortytwo2fa[twoFactorOnLogin]" >';
-        if ((string)$loginState == 'activated') {
-            $html.= '<option selected="selected" value="activated">Activated</option>';
-            $html.= '<option value="disabled">Disabled</option>';
-        } else {
-            $html.= '<option value="activated">Activated</option>';
-            $html.= '<option selected="selected" value="disabled">Disabled</option>';
-        }
-        $html.= '</select>';
-        echo $html;
+    /**
+     * Select to have the 2FA mandatory on login.
+     */
+    public function twoFactorOnLoginMandatoryCallback()
+    {
+        echo $this->select(new LoginMandatoryValue());
     }
 
     /**
@@ -92,18 +99,7 @@ class LoginBehaviorSection implements SectionInterface
      */
     public function resendSMSCallback()
     {
-        $smsResend = new LoginResendStateValue();
-
-        $html = '<select id="smsResend" name="fortytwo2fa[smsResend]" >';
-        if ((string)$smsResend == 'yes') {
-            $html.= '<option selected="selected" value="yes">Yes</option>';
-            $html.= '<option value="no">No</option>';
-        } else {
-            $html.= '<option value="yes">Yes</option>';
-            $html.= '<option selected="selected" value="no">No</option>';
-        }
-        $html.= '</select>';
-        echo $html;
+        echo $this->select(new LoginResendStateValue());
     }
 
     /**
@@ -112,7 +108,7 @@ class LoginBehaviorSection implements SectionInterface
     public function twoFactorByRoleCallback()
     {
         $rolesObj = new LoginUsersValue();
-        $roles = $rolesObj->getValues();
+        $roles = $rolesObj->getValue();
         $html ='<select  id="twoFactorByRole" name="fortytwo2fa[twoFactorByRole][]"  size="5" multiple>';
         $select = '';
 

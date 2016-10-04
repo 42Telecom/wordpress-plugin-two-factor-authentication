@@ -6,7 +6,9 @@
         <th><label for="2faPhone">Phone Number.</label></th>
 
         <td>
-            <input type="text" name="2faPhone" id="mobile-number" value="{{phoneValue}}" class="regular-text" /><br />
+            <input type="text" id="mobile-number" value="{{phoneValue}}" class="regular-text" /><br />
+            <input type="hidden" name="2faPhone" id="hidden-phone" />
+            <input type="hidden" name="2faPhoneValidation" id="mobile-validation" value='' />
             <span class="description">Phone Number user for Two Factor Authentication.</span>
         </td>
     </tr>

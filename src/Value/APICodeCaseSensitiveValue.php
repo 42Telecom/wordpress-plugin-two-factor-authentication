@@ -15,7 +15,7 @@ class APICodeCaseSensitiveValue extends AbstractCollectionValue implements Value
     /**
      * @inheritDoc
      */
-    protected $collection = array('false', 'true');
+    protected $collection = array('false' => 'False', 'true' => 'True');
 
     /**
      * @inheritDoc
