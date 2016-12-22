@@ -157,7 +157,9 @@ class Login extends AbstractAuth
             }
 
             //Include the login header
-            login_header();
+            if (function_exists('login_header')) {
+                login_header();
+            }
 
             //Show error message
             if (!empty($errorMsg)) {
@@ -241,7 +243,9 @@ class Login extends AbstractAuth
         }
 
         //Include the login header
-        login_header();
+        if (function_exists('login_header')) {
+            login_header();
+        }
 
         //Show error message
         if (!empty($errorMsg)) {
@@ -406,7 +410,11 @@ class Login extends AbstractAuth
                     }
                     $message = '<p class="message">' . __('You have logged in successfully.') . '</p>';
                     $interimLogin = 'success'; // WPCS: override ok.
-                    login_header('', $message); ?>
+                    if (function_exists('login_header')) {
+                        login_header('', $message);
+                    }
+
+                    ?>
                     </div>
                     <?php
                     do_action('login_footer'); ?>

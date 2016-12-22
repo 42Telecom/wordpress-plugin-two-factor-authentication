@@ -209,7 +209,9 @@ class Register extends AbstractAuth
                     }
 
                     //Include the login header
-                    login_header();
+                    if (function_exists('login_header')) {
+                        login_header();
+                    }
 
                     // Showing error messages if they exists.
                     if (!empty($errorMsg)) {

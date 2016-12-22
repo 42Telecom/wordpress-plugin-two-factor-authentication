@@ -3,7 +3,7 @@ Contributors: fortytwotele
 Tags: 2fa, Two factor authentication, 2 factor authentication,  2 step authentication, 2-Factor, 2-step verification, login, register
 Requires at least: 4.4
 Tested up to: 4.6
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -81,6 +81,11 @@ The project is managed with Github. So you can report an issues on our [Reposito
 4. Resend the SMS code
 
 == Changelog ==
+
+
+## Version 1.1.1
+_2016-12-22_
+* **[IMPROVEMENT]** Don't call login_header if the function was disabled.
 
 == Version 1.1.0 ==
 _2016-10-04_

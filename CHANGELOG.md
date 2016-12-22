@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+## Version 1.1.1
+_2016-12-22_
+- **[IMPROVEMENT]** Don't call login_header if the function was disabled.
+
 ## Version 1.1.0
 _2016-10-04_
 - **[IMPROVEMENT]** Support for Wordpress 4.6.X.
