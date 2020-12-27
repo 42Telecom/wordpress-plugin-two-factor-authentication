@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+## Version 1.1.2
+_2020-12-27_
+- **[IMPROVEMENT]** Support for Wordpress 5.6.X.
+
 ## Version 1.1.1
 _2016-12-22_
 - **[IMPROVEMENT]** Support for Wordpress 4.7.X.
