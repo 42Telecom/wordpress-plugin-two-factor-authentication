@@ -2,8 +2,8 @@
 Contributors: fortytwotele
 Tags: 2fa, Two factor authentication, 2 factor authentication,  2 step authentication, 2-Factor, 2-step verification, login, register
 Requires at least: 4.4
-Tested up to: 4.7
-Stable tag: 1.1.1
+Tested up to: 5.6
+Stable tag: 1.1.2
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
